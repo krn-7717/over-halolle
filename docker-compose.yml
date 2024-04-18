@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  frontend:
+    container_name: frontend
+    build: 
+      context: ./docker/node_context
+      dockerfile: ./Dockerfile
+    user: node
+    working_dir: /home/node/frontend
+    volumes:
+      - ./frontend:/home/node/frontend
+    ports:
+      - 5173:5173
+    tty: true
+    depends_on:
+      - backend
+  
+  backend:
+    container_name: backend
+    build: 
+      context: ./docker/python_context
+      dockerfile: ./Dockerfile
+    user: pyuser
+    working_dir: /home/pyuser/backend
+    volumes:
+      - ./backend:/home/pyuser/backend
+    command: flask run -h 0.0.0.0 -p 5000 --debugger --reload
+    ports:
+      - 5000:5000
+    tty: true
