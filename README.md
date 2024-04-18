@@ -35,7 +35,13 @@
 ## Usage
 
 ### Backend
-* コンテナに入る
+#### Pythonパッケージのインストール
+1. コンテナに入る
     ```
     docker compose exec backend bash
     ```
+2. パッケージのインストール
+    ```
+    pip install パッケージ名
+    ```
+3. `./docker/python_context/requirements.txt`にインストールしたパッケージ名とバージョンを書く
