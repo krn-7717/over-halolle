@@ -7,6 +7,21 @@
     docker compose up --build
     ```
 
+2. フロントエンドコンテナに入る
+    ```
+    docker compose exec frontend bash
+    ```
+
+3. ライブラリをインストール
+    ```
+    npm ci
+    ```
+
+3. webサーバを起動
+    ```
+    npm run dev
+    ```
+
 2. ローカルホストにアクセス
 
 * バックエンド
@@ -16,3 +31,11 @@
 * フロントエンド
 
     http://localhost:5173/
+
+## Usage
+
+### Backend
+* コンテナに入る
+    ```
+    docker compose exec backend bash
+    ```
