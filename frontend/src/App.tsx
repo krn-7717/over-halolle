@@ -1,10 +1,10 @@
 import './App.css'
-import SkillsLineChart from './components/SkillsLineChart'
+import MySkills from './pages/MySkills'
 
 function App() {
   return (
     <>
-      <SkillsLineChart />
+      <MySkills />
     </>
   )
 }
