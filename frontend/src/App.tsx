@@ -1,5 +1,5 @@
 import './App.css'
-import SkillsLineChart from './components/LineChart'
+import SkillsLineChart from './components/SkillsLineChart'
 
 function App() {
   return (
