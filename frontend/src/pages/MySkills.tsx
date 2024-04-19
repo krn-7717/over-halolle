@@ -12,6 +12,11 @@ const MySkills:React.FC=()=>{
         {skill:"Linux",color:"pink"}
     ];
 
+    const skillButtonList:Array<ShowOneSkillButtonProps>=[
+        {skill:"All",color:"#f43f5e"},
+        ...skillDataList
+    ];
+
     const drawData:SkillsLineChartProps=[
         {skill:"Python",level:60,color:"#3572A5"},
         {skill:"Docker",level:50,color:"#384d54"},
@@ -21,7 +26,7 @@ const MySkills:React.FC=()=>{
     return(
         <div>
             <div>
-                {skillDataList.map((skillData,index)=>{
+                {skillButtonList.map((skillData,index)=>{
                     return(
                         <div key={index}>
                             <ShowOneSkillButton skillData={skillData} />
