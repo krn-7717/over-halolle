@@ -45,7 +45,7 @@ const SkillsLineChart:React.FC=()=>{
             foundationData.push({
                 x:"わからん",y:60
             });
-            axisTicks.push("");
+            axisTicks.push("何もわからん");
         }else if(i===100){
             foundationData.push({
                 x: 'チョットデキル', y: 85
@@ -59,7 +59,7 @@ const SkillsLineChart:React.FC=()=>{
 
     return(
         <div>
-            <AreaChart width={600} height={300} data={foundationData} margin={{ top: 20, right: 20, left: 35, bottom: 20 }} >
+            <AreaChart width={700} height={300} data={foundationData} margin={{ top: 20, right: 20, left: 35, bottom: 20 }} >
                 <defs>
                     <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="5%" stopColor="green" stopOpacity={0.8}/>
@@ -72,7 +72,7 @@ const SkillsLineChart:React.FC=()=>{
                 {Object.keys(drawData).map((data,index)=>{
                     return(
                         <>
-                            <ReferenceLine x={String(drawData[data].level)} stroke={drawData[data].color} strokeOpacity={0.5} strokeWidth={2.5} label={{value:data,position:"top"}} />
+                            <ReferenceLine x={String(drawData[data].level)} isFront={true} stroke={drawData[data].color} strokeOpacity={0.5} strokeWidth={2.5} label={{value:data,position:"top",style:{fill:drawData[data].color}}} />
                         </>
                     )
                 })}
