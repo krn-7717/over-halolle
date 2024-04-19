@@ -38,9 +38,9 @@ const SkillsLineChart:React.FC=()=>{
             axisTicks.push("完全に理解した");
         }else if(i===35){
             foundationData.push({
-                x: "なにもわからない", y: 25
+                x: "何もわからない", y: 25
             });
-            axisTicks.push("なにもわからない");
+            axisTicks.push("何もわからない");
         }else if(i===70){
             foundationData.push({
                 x:String(i),y:60
@@ -58,7 +58,7 @@ const SkillsLineChart:React.FC=()=>{
 
     return(
         <div>
-            <AreaChart width={700} height={300} data={foundationData} margin={{ top: 20, right: 20, left: 35, bottom: 20 }} >
+            <AreaChart width={750} height={300} data={foundationData} margin={{ top: 20, right: 20, left: 35, bottom: 20 }} >
                 <defs>
                     <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="5%" stopColor="green" stopOpacity={0.8}/>
@@ -75,7 +75,6 @@ const SkillsLineChart:React.FC=()=>{
                         </>
                     )
                 })}
-                {/* <ReferenceLine x="40" stroke="blue" strokeOpacity={0.5} strokeWidth={2.5} label={{value:"Docker",position:"top"}} /> */}
             </AreaChart>
         </div>
     )
