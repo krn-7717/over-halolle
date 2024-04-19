@@ -1,5 +1,5 @@
 import React from "react";
-import { LineChart,Line,CartesianGrid,XAxis,YAxis,ReferenceLine,AreaChart,Area } from "recharts";
+import { XAxis,YAxis,ReferenceLine,AreaChart,Area } from "recharts";
 
 const SkillsLineChart:React.FC=()=>{
     type FoundationData=Array<
@@ -56,7 +56,7 @@ const SkillsLineChart:React.FC=()=>{
                 </defs>
                 <Area type="monotone" dataKey="y" connectNulls stroke="green" fillOpacity={0.5} fill="url(#colorUv)" />
                 <XAxis dataKey="x" tickLine={false} ticks={axisTicks} label={{value:"知識・能力",position:"bottom"}} />
-                <YAxis label={{value:"自信",position:"left"}} />
+                <YAxis tickLine={false} tick={false} label={{value:"自信",position:"innerLeft"}} />
                 <ReferenceLine x="40" stroke="blue" label={{value:"Docker",position:"top"}} />
             </AreaChart>
         </div>
