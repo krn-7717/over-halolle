@@ -11,8 +11,9 @@ const SkillsLineChart:React.FC=()=>{
 
     const drawData:DrawData=[
         {skill:"Python",level:60,color:"#3572A5"},
-        {skill:"Docker",level:40,color:"#384d54"},
-        {skill:"C#",level:10,color:"#178600"}
+        {skill:"Docker",level:50,color:"#384d54"},
+        {skill:"C#",level:10,color:"#178600"},
+        {skill:"Linux",level:80,color:"pink"}
     ]
 
     type FoundationData=Array<
@@ -72,11 +73,12 @@ const SkillsLineChart:React.FC=()=>{
                 {drawData.map((data,index)=>{
                     return(
                         <>
-                            <ReferenceLine x={String(data.level)} isFront={true} stroke={data.color} strokeOpacity={0.5} strokeWidth={2.5} label={{value:data.skill,position:"top",style:{fill:data.color}}} />
+                            <ReferenceLine segment={[{ x: String(data.level), y: 0 }, { x: String(data.level), y: data.level<=70?data.level<=35?100:60:85 }]} isFront={true} stroke={data.color} strokeOpacity={0.8} strokeWidth={2.5} label={{value:data.skill,position:"top",style:{fill:data.color}}} />
                         </>
                     )
                 })}
             </AreaChart>
+            {/* x={String(data.level)} */}
         </div>
     )
 };
