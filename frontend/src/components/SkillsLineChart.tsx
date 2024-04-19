@@ -38,14 +38,13 @@ const SkillsLineChart:React.FC=()=>{
             axisTicks.push("完全に理解した");
         }else if(i===35){
             foundationData.push({
-                x: "無知の知", y: 25
+                x: "なにもわからない", y: 25
             });
-            axisTicks.push("無知の知");
+            axisTicks.push("なにもわからない");
         }else if(i===70){
             foundationData.push({
-                x:"わからん",y:60
+                x:String(i),y:60
             });
-            axisTicks.push("何もわからん");
         }else if(i===100){
             foundationData.push({
                 x: 'チョットデキル', y: 85
