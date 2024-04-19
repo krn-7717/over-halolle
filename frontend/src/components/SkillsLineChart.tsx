@@ -2,17 +2,18 @@ import React from "react";
 import { XAxis,YAxis,ReferenceLine,AreaChart,Area } from "recharts";
 
 const SkillsLineChart:React.FC=()=>{
-    type DrawData={
-        [key:string]:{
-            level:number,
-            color:string
-        }
-    }
+    type DrawData=Array<
+    {
+        skill:string;
+        level:number;
+        color:string;
+    }>;
 
-    const drawData:DrawData={
-        Docker:{level:40,color:"blue"},
-        Python:{level:50,color:"green"}
-    }
+    const drawData:DrawData=[
+        {skill:"Python",level:60,color:"#3572A5"},
+        {skill:"Docker",level:40,color:"#384d54"},
+        {skill:"C#",level:10,color:"#178600"}
+    ]
 
     type FoundationData=Array<
     {
@@ -21,7 +22,7 @@ const SkillsLineChart:React.FC=()=>{
     } | {
         x: string;
         y?: undefined;
-    }>
+    }>;
 
     const foundationData:FoundationData=[];
     const axisTicks:Array<string>=[];
@@ -68,10 +69,10 @@ const SkillsLineChart:React.FC=()=>{
                 <Area type="monotone" dataKey="y" connectNulls stroke="green" fillOpacity={0.5} fill="url(#colorUv)" />
                 <XAxis dataKey="x" tickLine={false} ticks={axisTicks} label={{value:"知識・能力",position:"bottom"}} />
                 <YAxis tickLine={false} tick={false} label={{value:"自信",position:"innerLeft"}} />
-                {Object.keys(drawData).map((data,index)=>{
+                {drawData.map((data,index)=>{
                     return(
                         <>
-                            <ReferenceLine x={String(drawData[data].level)} isFront={true} stroke={drawData[data].color} strokeOpacity={0.5} strokeWidth={2.5} label={{value:data,position:"top",style:{fill:drawData[data].color}}} />
+                            <ReferenceLine x={String(data.level)} isFront={true} stroke={data.color} strokeOpacity={0.5} strokeWidth={2.5} label={{value:data.skill,position:"top",style:{fill:data.color}}} />
                         </>
                     )
                 })}
