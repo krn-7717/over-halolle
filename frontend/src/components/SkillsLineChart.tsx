@@ -63,11 +63,11 @@ const SkillsLineChart:React.FC=()=>{
             <AreaChart width={750} height={300} data={foundationData} margin={{ top: 20, right: 20, left: 35, bottom: 20 }} >
                 <defs>
                     <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="green" stopOpacity={0.8}/>
-                        <stop offset="95%" stopColor="green" stopOpacity={0}/>
+                        <stop offset="5%" stopColor="#38bdf8" stopOpacity={0.7}/>
+                        <stop offset="95%" stopColor="#38bdf8" stopOpacity={0.2}/>
                     </linearGradient>
                 </defs>
-                <Area type="monotone" dataKey="y" connectNulls stroke="green" fillOpacity={0.5} fill="url(#colorUv)" />
+                <Area type="monotone" dataKey="y" connectNulls stroke="#38bdf8" fillOpacity={0.5} fill="url(#colorUv)" />
                 <XAxis dataKey="x" tickLine={false} ticks={axisTicks} label={{value:"知識・能力",position:"bottom"}} />
                 <YAxis tickLine={false} tick={false} label={{value:"自信",position:"innerLeft"}} />
                 {drawData.map((data,index)=>{
@@ -78,7 +78,6 @@ const SkillsLineChart:React.FC=()=>{
                     )
                 })}
             </AreaChart>
-            {/* x={String(data.level)} */}
         </div>
     )
 };
