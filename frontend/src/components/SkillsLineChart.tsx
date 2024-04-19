@@ -1,21 +1,8 @@
 import React from "react";
 import { XAxis,YAxis,ReferenceLine,AreaChart,Area } from "recharts";
+import { SkillsLineChartProps } from "../types/skillsLineChart";
 
-const SkillsLineChart:React.FC=()=>{
-    type DrawData=Array<
-    {
-        skill:string;
-        level:number;
-        color:string;
-    }>;
-
-    const drawData:DrawData=[
-        {skill:"Python",level:60,color:"#3572A5"},
-        {skill:"Docker",level:50,color:"#384d54"},
-        {skill:"C#",level:10,color:"#178600"},
-        {skill:"Linux",level:80,color:"pink"}
-    ]
-
+const SkillsLineChart:React.FC<{drawData:SkillsLineChartProps}>=({drawData})=>{
     type FoundationData=Array<
     {
         x: string;
