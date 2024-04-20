@@ -46,14 +46,8 @@ const SkillsLineChart:React.FC<{drawData:SkillsLineChartProps}>=({drawData})=>{
     };
 
     const [indexForAnimation, setIndexForAnimation] = useState<number>(-1);
-    const [isShowDrawData,setIsShowDrawData]=useState<boolean>(false);
     useEffect(():void=>{
-        setIsShowDrawData(false);
         setIndexForAnimation(indexForAnimation+1);
-        // setTimeout(():void=>{
-        //     setIsShowDrawData(true);
-        // },1500);
-        setIsShowDrawData(true);
     },[drawData]);
 
     return(
@@ -72,13 +66,13 @@ const SkillsLineChart:React.FC<{drawData:SkillsLineChartProps}>=({drawData})=>{
                 isAnimationActive={true} animationDuration={1500}/>
                 <XAxis dataKey="x" tickLine={false} ticks={axisTicks} label={{value:"知識・能力",position:"bottom"}} />
                 <YAxis tickLine={false} tick={false} label={{value:"自信",position:"innerLeft"}} />
-                {isShowDrawData?drawData?.map((data,index)=>{
+                {drawData?.map((data)=>{
                     return(
                         <>
                             <ReferenceLine segment={[{ x: String(data.level), y: 0 }, { x: String(data.level), y: data.level<=70?data.level<=35?100:60:85 }]} isFront={true} stroke={data.color} strokeOpacity={0.8} strokeWidth={2.5} label={{value:data.data,position:"top",style:{fill:data.color}}} />
                         </>
                     )
-                }):undefined}
+                })}
             </AreaChart>
         </div>
     )
