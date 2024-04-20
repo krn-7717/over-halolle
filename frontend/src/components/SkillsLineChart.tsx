@@ -43,11 +43,18 @@ const SkillsLineChart:React.FC<{drawData:SkillsLineChartProps}>=({drawData})=>{
             foundationData.push({x:String(i)});
             axisTicks.push("");
         }
-    }
+    };
+
     const [indexForAnimation, setIndexForAnimation] = useState<number>(-1);
     useEffect(():void=>{
+        setIsShowDrawData(false);
         setIndexForAnimation(indexForAnimation+1);
+        setTimeout(():void=>{
+            setIsShowDrawData(true);
+        },1500);
     },[drawData]);
+
+    const [isShowDrawData,setIsShowDrawData]=useState<boolean>(false);
 
     return(
         <div>
@@ -62,16 +69,16 @@ const SkillsLineChart:React.FC<{drawData:SkillsLineChartProps}>=({drawData})=>{
                     </linearGradient>
                 </defs>
                 <Area type="monotone" dataKey="y" connectNulls stroke="#38bdf8" fillOpacity={0.5} fill="url(#colorUv)"
-                isAnimationActive={true} animationDuration={1500} />
+                isAnimationActive={true} animationDuration={1500}/>
                 <XAxis dataKey="x" tickLine={false} ticks={axisTicks} label={{value:"知識・能力",position:"bottom"}} />
                 <YAxis tickLine={false} tick={false} label={{value:"自信",position:"innerLeft"}} />
-                {drawData?.map((data,index)=>{
+                {isShowDrawData?drawData?.map((data,index)=>{
                     return(
                         <>
                             <ReferenceLine segment={[{ x: String(data.level), y: 0 }, { x: String(data.level), y: data.level<=70?data.level<=35?100:60:85 }]} isFront={true} stroke={data.color} strokeOpacity={0.8} strokeWidth={2.5} label={{value:data.skill,position:"top",style:{fill:data.color}}} />
                         </>
                     )
-                })}
+                }):undefined}
             </AreaChart>
         </div>
     )
