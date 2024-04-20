@@ -48,22 +48,24 @@ const MySkills:React.FC=()=>{
             {data:"23.10.10",level:60,color:"#3572A5"},
         ]}
         // ----------------仮データ----------------
-        
+
         setDrawData(responseData);
     },[skillNameUserSelected]);
 
     return(
-        <div>
-            <div>
+        <div className="flex">
+            <div className="p-4">
                 {skillButtonList.map((skillData,index)=>{
                     return(
-                        <div key={index}>
+                        <div key={index} className="p-1 w-full">
                             <ShowOneSkillButton skillData={skillData} handleOnClick={handleChangeSkillNameUserSelected} isButtonSelected={skillData.skill===skillNameUserSelected?true:false} />
                         </div>
                     )
                 })}
             </div>
-            <SkillsLineChart drawData={drawData}/>
+            <div>
+                <SkillsLineChart drawData={drawData}/>
+            </div>
         </div>
     )
 };
