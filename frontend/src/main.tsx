@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage.tsx'
 import LoginPage from './pages/LoginPage.tsx'
 import MySkillsPage from './pages/MySkillsPage.tsx'
 import './index.css'
+import SignupPage from './pages/SignupPage.tsx'
 
 const router=createBrowserRouter([
   {
@@ -12,8 +13,12 @@ const router=createBrowserRouter([
     element:<HomePage />
   },
   {
-    path:"login",
+    path:"/login",
     element:<LoginPage />
+  },
+  {
+    path:"/signup",
+    element:<SignupPage />
   },
   {
     path:"/my-skill",

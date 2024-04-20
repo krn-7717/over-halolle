@@ -1,5 +1,6 @@
 import React from "react"
 import { ShowOneSkillButtonProps } from "../types/showOneSkillButton";
+import { Link } from "react-router-dom";
 
 const HomePage:React.FC=()=>{
 
@@ -27,12 +28,12 @@ const HomePage:React.FC=()=>{
                         <span className="ml-3 text-2xl md:text-xl">Skill Mapper</span>
                     </a>
                     <div>
-                        <button className="inline-flex justify-center items-center m-2 border-0 py-1 px-3 w-32 focus:outline-none rounded text-base text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-30">
+                        <Link to={"/login"} className="inline-flex justify-center items-center m-2 border-0 py-1 px-3 w-32 focus:outline-none rounded text-base text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-30">
                             ログイン
-                        </button>
-                        <button className="inline-flex justify-center items-center m-2 border-0 py-1 px-3 w-32 focus:outline-none rounded text-base text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-30">
+                        </Link>
+                        <Link to={"/signup"} className="inline-flex justify-center items-center m-2 border-0 py-1 px-3 w-32 focus:outline-none rounded text-base text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-30">
                             サインアップ
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </header>
@@ -59,12 +60,12 @@ const HomePage:React.FC=()=>{
                             <span className="text-gray-700 ml-2">etc...</span>
                         </div>
                         <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
-                            <button className="inline-flex justify-center items-center py-3 px-5 sm:w-36 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
+                            <Link to={"/login"} className="inline-flex justify-center items-center py-3 px-5 sm:w-36 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
                                 ログイン
-                            </button>
-                            <button className="inline-flex justify-center items-center py-3 px-5 sm:w-36 sm:ms-4 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
+                            </Link>
+                            <Link to={"/signup"} className="inline-flex justify-center items-center py-3 px-5 sm:w-36 sm:ms-4 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
                                 サインアップ
-                            </button> 
+                            </Link> 
                         </div>
                     </div>
                 </div>
