@@ -22,7 +22,16 @@ const SignupPage:React.FC=()=>{
                 password:formJson.password
             };
             console.log(postData);
-        }
+            const responseData={status:200,data:{userId:1234,userName:"over-halolle"}};
+            if(responseData.status===200){
+                localStorage.setItem("userId",String(responseData.data.userId));
+                localStorage.setItem("userName",String(responseData.data.userName));    
+            }else if(responseData.status===409){
+                setErrorMessage("このメールアドレスはすでに使用されています");
+            }else{
+                setErrorMessage("現在、サービスを使用することができません");
+            };
+        };
     };
     return(
         <div className="h-svh">

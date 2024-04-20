@@ -12,8 +12,18 @@ const LoginPage:React.FC=()=>{
         }else if(!formJson.password){
             setErrorMessage("パスワードを入力してください");
         }else{
-            // formJsonをPostする
-            console.log(formJson);
+            // TODO:formJsonをPostする
+            const postData=formJson;
+            console.log(postData);
+            const responseData={status:200,data:{userId:1234,userName:"over-halolle"}};
+            if(responseData.status===200){
+                localStorage.setItem("userId",String(responseData.data.userId));
+                localStorage.setItem("userName",String(responseData.data.userName));
+            }else if(responseData.status===401){
+                setErrorMessage("メールアドレスかパスワードが間違っています");
+            }else{
+                setErrorMessage("現在、サービスを使用することができません");
+            }
         }
     };
     return(
@@ -25,7 +35,7 @@ const LoginPage:React.FC=()=>{
                             {/* <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
                             <path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm64 192c17.7 0 32 14.3 32 32v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V256c0-17.7 14.3-32 32-32zm64-64c0-17.7 14.3-32 32-32s32 14.3 32 32V352c0 17.7-14.3 32-32 32s-32-14.3-32-32V160zM320 288c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32z"/>
                         </svg>
-                        <span className="ml-3 text-2xl md:text-xl">Skill Mapper</span>
+                        <span className="ml-3 text-xl md:text-3xl">Skill Mapper</span>
                     </a>
                 </div>
             </header>
