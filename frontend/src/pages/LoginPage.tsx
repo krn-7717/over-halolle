@@ -12,7 +12,7 @@ const LoginPage:React.FC=()=>{
         }else if(!formJson.password){
             setErrorMessage("パスワードを入力してください");
         }else{
-            // TODO:formJsonをPostする
+            // TODO:APIに投げる
             const postData=formJson;
             console.log(postData);
             const responseData={status:200,data:{userId:1234,userName:"over-halolle"}};
@@ -24,7 +24,7 @@ const LoginPage:React.FC=()=>{
             }else{
                 setErrorMessage("現在、サービスを使用することができません");
             }
-        }
+        };
     };
     return(
         <div className="h-svh">

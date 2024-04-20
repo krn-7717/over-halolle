@@ -16,7 +16,7 @@ const SignupPage:React.FC=()=>{
             setErrorMessage("パスワードが間違っています");
         }
         else{
-            // formJsonをPostする
+            // TODO:APIに投げる
             const postData={
                 email:formJson.email,
                 password:formJson.password
