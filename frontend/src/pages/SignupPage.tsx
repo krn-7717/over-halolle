@@ -1,6 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 
 const SignupPage:React.FC=()=>{
+    const [errorMessage,setErrorMessage]=useState<string|undefined>();
+
+    const handleSubmit=(e:any):void=>{
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const formJson = Object.fromEntries(formData.entries());
+        if(!formJson.email){
+            setErrorMessage("メールアドレスを入力してください");
+        }else if(!formJson.password){
+            setErrorMessage("パスワードを入力してください");
+        }else if(formJson.password!==formJson.checkPassword){
+            setErrorMessage("パスワードが間違っています");
+        }
+        else{
+            // formJsonをPostする
+            const postData={
+                email:formJson.email,
+                password:formJson.password
+            };
+            console.log(postData);
+        }
+    };
     return(
         <div className="h-svh">
             <header className="sticky top-0 bg-white z-10 shadow">
@@ -15,7 +38,7 @@ const SignupPage:React.FC=()=>{
                 </div>
             </header>
             <div className="h-[80%] flex justify-center items-center">
-                <div className="w-11/12 md:w-1/3 bg-white rounded-md shadow-xl border-2 border-gray-100 flex flex-col justify-center items-center p-4">
+                <form method="post" onSubmit={handleSubmit} className="w-11/12 md:w-1/3 bg-white rounded-md shadow-xl border-2 border-gray-100 flex flex-col justify-center items-center p-4">
                     <h1 className=" text-xl font-bold my-6">アカウント登録画面</h1>
                     <div className="my-4">
                         <label  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">メールアドレス</label>
@@ -26,7 +49,7 @@ const SignupPage:React.FC=()=>{
                                     <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
                                 </svg>
                             </div>
-                            <input type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com"/>
+                            <input type="email" name="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com"/>
                         </div>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">パスワード</label>
                         <div className="relative mb-6">
@@ -36,7 +59,7 @@ const SignupPage:React.FC=()=>{
                                     <path fill="currentColor" d="M336 352c97.2 0 176-78.8 176-176S433.2 0 336 0S160 78.8 160 176c0 18.7 2.9 36.8 8.3 53.7L7 391c-4.5 4.5-7 10.6-7 17v80c0 13.3 10.7 24 24 24h80c13.3 0 24-10.7 24-24V448h40c13.3 0 24-10.7 24-24V384h40c6.4 0 12.5-2.5 17-7l33.3-33.3c16.9 5.4 35 8.3 53.7 8.3zM376 96a40 40 0 1 1 0 80 40 40 0 1 1 0-80z"/>
                                 </svg>
                             </div>
-                            <input type="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                            <input type="password" name="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                         </div>
                         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">パスワード確認</label>
                         <div className="relative mb-6">
@@ -46,13 +69,14 @@ const SignupPage:React.FC=()=>{
                                     <path fill="currentColor" d="M336 352c97.2 0 176-78.8 176-176S433.2 0 336 0S160 78.8 160 176c0 18.7 2.9 36.8 8.3 53.7L7 391c-4.5 4.5-7 10.6-7 17v80c0 13.3 10.7 24 24 24h80c13.3 0 24-10.7 24-24V448h40c13.3 0 24-10.7 24-24V384h40c6.4 0 12.5-2.5 17-7l33.3-33.3c16.9 5.4 35 8.3 53.7 8.3zM376 96a40 40 0 1 1 0 80 40 40 0 1 1 0-80z"/>
                                 </svg>
                             </div>
-                            <input type="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                            <input type="password" name="checkPassword" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                         </div>
                     </div>
-                    <button type="button" className="inline-flex items-center justify-center px-4 py-2 my-4 text-sm font-medium tracking-wide text-white transition-colors duration-200 bg-blue-600 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:shadow-outline focus:outline-none">
+                    <span className="text-red-600 h-8">{errorMessage}</span>
+                    <button type="submit" className="inline-flex items-center justify-center px-4 py-2 my-4 text-sm font-medium tracking-wide text-white transition-colors duration-200 bg-blue-600 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:shadow-outline focus:outline-none">
                         登録
                     </button>
-                </div>
+                </form>
             </div>
         </div>
     )

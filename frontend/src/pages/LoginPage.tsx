@@ -15,7 +15,7 @@ const LoginPage:React.FC=()=>{
             // formJsonをPostする
             console.log(formJson);
         }
-  }
+    };
     return(
         <div className="h-svh">
             <header className="sticky top-0 bg-white z-10 shadow">
