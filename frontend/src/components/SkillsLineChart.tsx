@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { XAxis,YAxis,ReferenceLine,AreaChart,Area } from "recharts";
 import { SkillsLineChartProps } from "../types/skillsLineChart";
 
@@ -44,20 +44,28 @@ const SkillsLineChart:React.FC<{drawData:SkillsLineChartProps}>=({drawData})=>{
             axisTicks.push("");
         }
     }
+    const [indexForAnimation, setIndexForAnimation] = useState<number>(-1);
+    useEffect(():void=>{
+        setIndexForAnimation(indexForAnimation+1);
+    },[drawData]);
 
     return(
         <div>
-            <AreaChart width={750} height={300} data={foundationData} margin={{ top: 20, right: 20, left: 35, bottom: 20 }} >
+            <AreaChart
+                width={750} height={300} margin={{ top: 20, right: 20, left: 35, bottom: 20 }}
+                data={foundationData}
+                key={indexForAnimation}>
                 <defs>
                     <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="5%" stopColor="#38bdf8" stopOpacity={0.7}/>
                         <stop offset="95%" stopColor="#38bdf8" stopOpacity={0.2}/>
                     </linearGradient>
                 </defs>
-                <Area type="monotone" dataKey="y" connectNulls stroke="#38bdf8" fillOpacity={0.5} fill="url(#colorUv)" />
+                <Area type="monotone" dataKey="y" connectNulls stroke="#38bdf8" fillOpacity={0.5} fill="url(#colorUv)"
+                isAnimationActive={true} animationDuration={1500} />
                 <XAxis dataKey="x" tickLine={false} ticks={axisTicks} label={{value:"知識・能力",position:"bottom"}} />
                 <YAxis tickLine={false} tick={false} label={{value:"自信",position:"innerLeft"}} />
-                {drawData.map((data,index)=>{
+                {drawData?.map((data,index)=>{
                     return(
                         <>
                             <ReferenceLine segment={[{ x: String(data.level), y: 0 }, { x: String(data.level), y: data.level<=70?data.level<=35?100:60:85 }]} isFront={true} stroke={data.color} strokeOpacity={0.8} strokeWidth={2.5} label={{value:data.skill,position:"top",style:{fill:data.color}}} />
