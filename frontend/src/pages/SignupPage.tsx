@@ -16,7 +16,7 @@ const SignupPage:React.FC=()=>{
             </header>
             <div className="h-[80%] flex justify-center items-center">
                 <div className="w-11/12 md:w-1/3 bg-white rounded-md shadow-xl border-2 border-gray-100 flex flex-col justify-center items-center p-4">
-                    <h1 className=" text-xl font-bold my-6">アカウントを登録してください</h1>
+                    <h1 className=" text-xl font-bold my-6">アカウント登録画面</h1>
                     <div className="my-4">
                         <label  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">メールアドレス</label>
                         <div className="relative mb-6">
