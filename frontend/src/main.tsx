@@ -1,18 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {createBrowserRouter,RouterProvider} from 'react-router-dom'
-import Home from './pages/Home.tsx'
-import MySkills from './pages/MySkills.tsx'
+import HomePage from './pages/HomePage.tsx'
+import LoginPage from './pages/LoginPage.tsx'
+import MySkillsPage from './pages/MySkillsPage.tsx'
 import './index.css'
 
 const router=createBrowserRouter([
   {
     path:"/",
-    element:<Home />
+    element:<HomePage />
+  },
+  {
+    path:"login",
+    element:<LoginPage />
   },
   {
     path:"/my-skill",
-    element:<MySkills />
+    element:<MySkillsPage />
   }
 ])
 
