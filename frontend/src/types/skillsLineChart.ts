@@ -1,6 +1,6 @@
 export type SkillsLineChartProps=Array<
     {
-        skill:string;
+        data:string;
         level:number;
         color:string;
     }>|undefined;

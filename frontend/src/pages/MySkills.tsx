@@ -25,28 +25,31 @@ const MySkills:React.FC=()=>{
 
     const [drawData,setDrawData]=useState<SkillsLineChartProps>(undefined);
 
-    // useEffect(():void=>{
-    //     // Allのデータを受け取る
-    //     const data:SkillsLineChartProps=[
-    //         {skill:"Python",level:60,color:"#3572A5"},
-    //         {skill:"Docker",level:50,color:"#384d54"},
-    //         {skill:"C#",level:10,color:"#178600"},
-    //         {skill:"Linux",level:80,color:"pink"}
-    //     ];
-    //     setDrawData(data);
-    // },[]);
-
     useEffect(():void=>{
-        // postDataを使って、データを受け取る
+        // todo:postDataを使って、データを受け取る（後でユーザー名orIDも追加する）
         const postData=skillNameUserSelected;
 
-        const data:SkillsLineChartProps=[
-            {skill:"Python",level:60,color:"#3572A5"},
-            {skill:"Docker",level:50,color:"#384d54"},
-            {skill:"C#",level:10,color:"#178600"},
-            {skill:"Linux",level:80,color:"pink"}
+        // ----------------仮データ----------------
+        // 例）postData=Allのとき
+        let responseData:SkillsLineChartProps=[
+            {data:"Python",level:60,color:"#3572A5"},
+            {data:"Docker",level:50,color:"#384d54"},
+            {data:"C#",level:10,color:"#178600"},
+            {data:"Linux",level:80,color:"pink"}
         ];
-        setDrawData(data);
+        // 例）postData=Pythonのとき
+        if(postData==="Python"){
+        responseData=[
+            {data:"23.1.1",level:10,color:"#3572A5"},
+            {data:"23.2.1",level:20,color:"#3572A5"},
+            {data:"23.3.1",level:30,color:"#3572A5"},
+            {data:"23.4.1",level:40,color:"#3572A5"},
+            {data:"23.5.10",level:45,color:"#3572A5"},
+            {data:"23.10.10",level:60,color:"#3572A5"},
+        ]}
+        // ----------------仮データ----------------
+        
+        setDrawData(responseData);
     },[skillNameUserSelected]);
 
     return(

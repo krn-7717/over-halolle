@@ -46,15 +46,15 @@ const SkillsLineChart:React.FC<{drawData:SkillsLineChartProps}>=({drawData})=>{
     };
 
     const [indexForAnimation, setIndexForAnimation] = useState<number>(-1);
+    const [isShowDrawData,setIsShowDrawData]=useState<boolean>(false);
     useEffect(():void=>{
         setIsShowDrawData(false);
         setIndexForAnimation(indexForAnimation+1);
-        setTimeout(():void=>{
-            setIsShowDrawData(true);
-        },1500);
+        // setTimeout(():void=>{
+        //     setIsShowDrawData(true);
+        // },1500);
+        setIsShowDrawData(true);
     },[drawData]);
-
-    const [isShowDrawData,setIsShowDrawData]=useState<boolean>(false);
 
     return(
         <div>
@@ -75,7 +75,7 @@ const SkillsLineChart:React.FC<{drawData:SkillsLineChartProps}>=({drawData})=>{
                 {isShowDrawData?drawData?.map((data,index)=>{
                     return(
                         <>
-                            <ReferenceLine segment={[{ x: String(data.level), y: 0 }, { x: String(data.level), y: data.level<=70?data.level<=35?100:60:85 }]} isFront={true} stroke={data.color} strokeOpacity={0.8} strokeWidth={2.5} label={{value:data.skill,position:"top",style:{fill:data.color}}} />
+                            <ReferenceLine segment={[{ x: String(data.level), y: 0 }, { x: String(data.level), y: data.level<=70?data.level<=35?100:60:85 }]} isFront={true} stroke={data.color} strokeOpacity={0.8} strokeWidth={2.5} label={{value:data.data,position:"top",style:{fill:data.color}}} />
                         </>
                     )
                 }):undefined}
