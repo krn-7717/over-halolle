@@ -19,7 +19,9 @@ const MySkills:React.FC=()=>{
             {data:"Python",level:60,color:"#3572A5"},
             {data:"Docker",level:50,color:"#384d54"},
             {data:"C#",level:10,color:"#178600"},
-            {data:"Linux",level:80,color:"pink"}
+            {data:"Linux",level:80,color:"pink"},
+            {data:"GitHub",level:80,color:"gray"},
+            {data:"Go",level:80,color:"#00ADD8"}
         ];
         setSummarizedSkillDataList(responseData);
         setDrawData(responseData);
@@ -72,11 +74,11 @@ const MySkills:React.FC=()=>{
     },[skillNameUserSelected]);
 
     return(
-        <div className="flex p-2 rounded-md border-2 border-gray-200 w-fit">
-            <div className="p-2">
+        <div className="h-[350px] w-[870px] flex p-2 rounded-md border-2 border-gray-200 items-center">
+            <div className="p-2 flex flex-col h-full flex-wrap overflow-y-scroll">
                 {skillButtonList?.map((skillData,index)=>{
                     return(
-                        <div key={index} className="p-1 w-full">
+                        <div key={index} className="p-1">
                             <ShowOneSkillButton skillData={skillData} handleOnClick={handleChangeSkillNameUserSelected} isButtonSelected={skillData.skill===skillNameUserSelected?true:false} />
                         </div>
                     )
