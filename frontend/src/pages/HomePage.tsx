@@ -37,7 +37,7 @@ const HomePage:React.FC=()=>{
                     </div>
                 </div>
             </header>
-            <div id="main" className="">
+            <div id="main">
                 <div className="bg-sky-200 h-[90vh] py-8 flex justify-center items-center">
                     <div className="flex flex-col items-center p-8 bg-white bg-opacity-95 shadow-md rounded-md h-fit w-11/12 md:w-5/6 ">
                         <div className="flex title-font font-medium items-center text-gray-900 m-4 md:m-6">
@@ -59,7 +59,7 @@ const HomePage:React.FC=()=>{
                             })}
                             <span className="text-gray-700 ml-2">etc...</span>
                         </div>
-                        <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+                        <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:m-10">
                             <Link to={"/login"} className="inline-flex justify-center items-center py-3 px-5 sm:w-36 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
                                 ログイン
                             </Link>
