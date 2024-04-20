@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SkillsLineChart from "../components/SkillsLineChart";
 import { SkillsLineChartProps } from "../types/skillsLineChart";
 import ShowOneSkillButton from "../components/ShowOneSkillButton";
@@ -17,6 +17,13 @@ const MySkills:React.FC=()=>{
         ...skillDataList
     ];
 
+    const [skillNameUserSelected,setSkillNameUserSelected]=useState<string>(skillButtonList[0].skill);
+
+    const handleChangeSkillNameUserSelected=(skillName:string):void=>{
+        console.log(skillName)
+        setSkillNameUserSelected(skillName);
+    };
+
     const drawData:SkillsLineChartProps=[
         {skill:"Python",level:60,color:"#3572A5"},
         {skill:"Docker",level:50,color:"#384d54"},
@@ -29,7 +36,7 @@ const MySkills:React.FC=()=>{
                 {skillButtonList.map((skillData,index)=>{
                     return(
                         <div key={index}>
-                            <ShowOneSkillButton skillData={skillData} />
+                            <ShowOneSkillButton skillData={skillData} handleOnClick={handleChangeSkillNameUserSelected} isButtonSelected={skillData.skill===skillNameUserSelected?true:false} />
                         </div>
                     )
                 })}
