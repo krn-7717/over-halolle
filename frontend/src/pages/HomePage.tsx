@@ -1,7 +1,7 @@
 import React from "react"
 import { ShowOneSkillButtonProps } from "../types/showOneSkillButton";
 
-const Home:React.FC=()=>{
+const HomePage:React.FC=()=>{
 
     const exampleSkillList:Array<ShowOneSkillButtonProps>=[
         {skill:"Python",color:"#3572A5"},
@@ -80,4 +80,4 @@ const Home:React.FC=()=>{
         </div>
     )
 };
-export default Home;
+export default HomePage;

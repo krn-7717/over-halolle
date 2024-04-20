@@ -4,7 +4,7 @@ import { SkillsLineChartProps } from "../types/skillsLineChart";
 import ShowOneSkillButton from "../components/ShowOneSkillButton";
 import { ShowOneSkillButtonProps } from "../types/showOneSkillButton";
 
-const MySkills:React.FC=()=>{
+const MySkillsPage:React.FC=()=>{
     const [summarizedSkillDataList,setSummarizedSkillDataList]=useState<SkillsLineChartProps>();
     const [skillButtonList,setSkillButtonList]=useState<Array<ShowOneSkillButtonProps>>([{skill:"All",color:"#f43f5e"}]);
     const [drawData,setDrawData]=useState<SkillsLineChartProps>([]);
@@ -91,4 +91,4 @@ const MySkills:React.FC=()=>{
     )
 };
 
-export default MySkills;
+export default MySkillsPage;
