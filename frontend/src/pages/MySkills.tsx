@@ -72,8 +72,8 @@ const MySkills:React.FC=()=>{
     },[skillNameUserSelected]);
 
     return(
-        <div className="flex">
-            <div className="p-4">
+        <div className="flex p-2 rounded-md border-2 border-gray-200 w-fit">
+            <div className="p-2">
                 {skillButtonList?.map((skillData,index)=>{
                     return(
                         <div key={index} className="p-1 w-full">

@@ -53,7 +53,7 @@ const SkillsLineChart:React.FC<{drawData:SkillsLineChartProps}>=({drawData})=>{
     return(
         <div>
             <AreaChart
-                width={750} height={300} margin={{ top: 20, right: 20, left: 35, bottom: 20 }}
+                width={750} height={300} margin={{ top: 20, right: 20, left: 5, bottom: 20 }}
                 data={foundationData}
                 key={indexForAnimation}>
                 <defs>
