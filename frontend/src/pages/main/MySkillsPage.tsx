@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import SkillsLineChart from "../components/SkillsLineChart";
-import { SkillsLineChartProps } from "../types/skillsLineChart";
-import ShowOneSkillButton from "../components/ShowOneSkillButton";
-import { ShowOneSkillButtonProps } from "../types/showOneSkillButton";
+import SkillsLineChart from "../../components/SkillsLineChart";
+import { SkillsLineChartProps } from "../../types/skillsLineChart";
+import ShowOneSkillButton from "../../components/ShowOneSkillButton";
+import { ShowOneSkillButtonProps } from "../../types/showOneSkillButton";
 
 const MySkillsPage:React.FC=()=>{
     const [summarizedSkillDataList,setSummarizedSkillDataList]=useState<SkillsLineChartProps>();

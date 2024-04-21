@@ -3,8 +3,8 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
 import MainLayout from "../pages/MainLayout";
-import SettingsPage from "../pages/SettingsPage";
-import MySkillsPage from "../pages/MySkillsPage";
+import SettingsPage from "../pages/main/SettingsPage";
+import MySkillsPage from "../pages/main/MySkillsPage";
 import ErrorPage from "../pages/ErrorPage";
 
 const Router=createBrowserRouter([
@@ -30,7 +30,7 @@ const Router=createBrowserRouter([
             element:<SettingsPage />
           },
           {
-            path:"my-skill",
+            path:"",
             element:<MySkillsPage />
           }
       ]
