@@ -3,6 +3,7 @@ import SkillsLineChart from "../../components/SkillsLineChart";
 import { SkillsLineChartProps } from "../../types/skillsLineChart";
 import ShowOneSkillButton from "../../components/ShowOneSkillButton";
 import { ShowOneSkillButtonProps } from "../../types/showOneSkillButton";
+import {useMediaQuery} from "react-responsive";
 
 const MySkillsPage:React.FC=()=>{
     const [summarizedSkillDataList,setSummarizedSkillDataList]=useState<SkillsLineChartProps>();
@@ -73,9 +74,20 @@ const MySkillsPage:React.FC=()=>{
         }
     },[skillNameUserSelected]);
 
+    // ---------------レイアウト用---------------
+    const [skillLineChartHeight,setSkillLineChartHeight]=useState<number>();
+    const handleSkillLineChartHeight=(heigth:number):void=>{
+        setSkillLineChartHeight(heigth);
+        console.log(heigth)
+    };
+    const isMediumScreen = useMediaQuery({ query: '(min-width: 748px)' })
+
+    // ---------------レイアウト用---------------
+
     return(
-        <div className="h-[390px]  md:h-[350px] w-[870px] flex flex-col md:flex-row p-2 rounded-md border-2 border-gray-200 items-center">
-            <div className="p-2 flex md:flex-col h-full flex-wrap overflow-y-scroll">
+        <div className="w-[372px] md:w-[700px] lg:w-[850px] flex flex-col md:flex-row p-2 rounded-md border-2 border-gray-200 items-center"
+        style={isMediumScreen?{height:skillLineChartHeight&&skillLineChartHeight+20}:{height:skillLineChartHeight&&skillLineChartHeight+68}}>
+            <div className="p-1 md:p-2 flex items-center md:items-stretch md:flex-col md:flex-wrap h-full w-full overflow-scroll">
                 {skillButtonList?.map((skillData,index)=>{
                     return(
                         <div key={index} className="p-1">
@@ -84,8 +96,10 @@ const MySkillsPage:React.FC=()=>{
                     )
                 })}
             </div>
-            <div>
-                <SkillsLineChart drawData={drawData}/>
+            <div className="h-fit">
+                <div className="w-[368px] md:w-[550px] lg:w-[700px]">
+                    <SkillsLineChart drawData={drawData} handleSkillLineChartHeight={handleSkillLineChartHeight}/>
+                </div>
             </div>
         </div>
     )

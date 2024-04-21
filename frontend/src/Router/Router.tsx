@@ -30,7 +30,7 @@ const Router=createBrowserRouter([
             element:<SettingsPage />
           },
           {
-            path:"",
+            path:"my-skills",
             element:<MySkillsPage />
           }
       ]
