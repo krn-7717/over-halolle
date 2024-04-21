@@ -2,12 +2,15 @@ import { createBrowserRouter } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
+import SettingsPage from "../pages/SettingsPage";
 import MySkillsPage from "../pages/MySkillsPage";
+import ErrorPage from "../pages/ErrorPage";
 
 const Router=createBrowserRouter([
     {
       path:"/",
-      element:<HomePage />
+      element:<HomePage />,
+      errorElement:<ErrorPage />,
     },
     {
       path:"/login",
@@ -17,6 +20,7 @@ const Router=createBrowserRouter([
       path:"/signup",
       element:<SignupPage />
     },
+    
     {
       path:"/my-skill",
       element:<MySkillsPage />
