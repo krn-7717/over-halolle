@@ -7,6 +7,7 @@ import SettingsPage from "../pages/main/SettingsPage";
 import MySkillsPage from "../pages/main/MySkillsPage";
 import ErrorPage from "../pages/ErrorPage";
 import GithubAuth from "../auth/GithubAuth";
+import QiitaAuth from "../auth/QiitaAuth";
 
 const Router=createBrowserRouter([
     {
@@ -39,6 +40,10 @@ const Router=createBrowserRouter([
     {
       path:"/auth/github/callback",
       element:<GithubAuth />
+    },
+    {
+      path:"/auth/qiita",
+      element:<QiitaAuth />
     }
   ]);
 
