@@ -18,12 +18,12 @@ export interface GetUserDataResponse{
     team_only: boolean;
     twitter_screen_name: string;
     website_url: string;
-}
+};
 
 export interface GetUserDataErrorResponse{
     message: string;
     type: string; 
-}
+};
 
 export const getUserData=async(userId:string):Promise<GetUserDataResponse|GetUserDataErrorResponse>=>{
     const response= await fetch(`https://qiita.com/api/v2/users/${userId}`,{
@@ -36,3 +36,9 @@ export const getUserData=async(userId:string):Promise<GetUserDataResponse|GetUse
     const data=response.json();
     return data;
 };
+
+export const setUserData=async(userId:string):Promise<boolean>=>{
+    const response= await fetch(BACKEND_URL);
+    const data=response.json();
+    return true;
+}

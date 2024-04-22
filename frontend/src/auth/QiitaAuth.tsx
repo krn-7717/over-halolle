@@ -20,9 +20,20 @@ const QiitaAuth:React.FC=()=>{
                             alert(`${userId} というアカウントは存在しません`);
                         }else{
                             const qiitaAccountData={userId:responseData.id,avatar_Url:responseData.profile_image_url};
-                            localStorage.setItem("qiita",JSON.stringify(qiitaAccountData));
-                            alert("Qiitaアカウントを連携しました。");
-                            setIsProcessing(false);
+                            try{
+                                (async()=>{
+                                    const responseData= await qiitaApi.setUserData(qiitaAccountData.userId);
+                                    if(responseData){
+                                        localStorage.setItem("qiita",JSON.stringify(qiitaAccountData));
+                                        alert("Qiitaアカウントを連携しました。");
+                                        setIsProcessing(false);            
+                                    }else{
+                                        alert("処理に失敗しました。");
+                                    };
+                                })();
+                            }catch(error){
+                                alert(`処理に失敗しました。Error:${error}`);
+                            };
                         }
                     })();
                 }catch(error){
