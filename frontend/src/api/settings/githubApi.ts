@@ -3,7 +3,7 @@ export type UserData={
     avatar_url:string
 };
 
-export const getUserData=async(code:string):Promise<UserData>=>{
+export const setUserData=async(code:string):Promise<UserData>=>{
     const postData=code;
     // fetch例
     const response= await fetch("https://api.github.com/users/ayakakawabe");

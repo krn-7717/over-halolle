@@ -1,6 +1,6 @@
 import React,{ useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import * as githubApi from "../api/githubApi";
+import * as githubApi from "../api/settings/githubApi";
 
 const GithubAuth:React.FC=()=>{
     const [isProcessing,setIsProcessing]=useState<boolean>(true);
@@ -12,7 +12,7 @@ const GithubAuth:React.FC=()=>{
     if(githubCode){
         try{
             (async()=>{
-                const responseData= await githubApi.getUserData(githubCode);
+                const responseData= await githubApi.setUserData(githubCode);
                 localStorage.setItem("github",JSON.stringify(responseData));
                 setIsProcessing(false);
             })();
