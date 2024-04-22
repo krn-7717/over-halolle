@@ -8,7 +8,6 @@ const GithubAuth:React.FC=()=>{
     const UrlQuery = new URLSearchParams(search);
     const githubCode = UrlQuery.get('code');
 
-    // TODO:githubアカウント情報を受け取る
     if(githubCode){
         try{
             (async()=>{
