@@ -17,13 +17,13 @@ const QiitaAuth:React.FC=()=>{
                     (async()=>{
                         const responseData= await qiitaApi.getUserData(userId);
                         if("type" in responseData && "message" in responseData){
-                            alert(`${userId} というアカウントは存在しません`);
+                            alert(`${userId} というアカウントは存在しません。`);
                         }else{
                             const qiitaAccountData={userId:responseData.id,avatar_Url:responseData.profile_image_url};
                             try{
                                 (async()=>{
                                     const responseData= await qiitaApi.setUserData(qiitaAccountData.userId);
-                                    if(responseData){
+                                    if(responseData.isSuccess){
                                         localStorage.setItem("qiita",JSON.stringify(qiitaAccountData));
                                         alert("Qiitaアカウントを連携しました。");
                                         setIsProcessing(false);            

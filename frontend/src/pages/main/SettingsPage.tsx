@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as userNameApi from "../../api/settings/userNameApi";
 import * as githubApi from "../../api/settings/githubApi";
+import * as qiitaApi from "../../api/settings/qiitaApi";
 import { useNavigate } from "react-router-dom";
 
 const SettingsPage:React.FC=()=>{
@@ -51,8 +52,9 @@ const SettingsPage:React.FC=()=>{
             if(isDeleteGithubAccount){
                 try{
                     (async()=>{
-                        const result= await githubApi.deleteUserData(1234);
-                        if(result){
+                        // TODO:仮ユーザIDを差し替える
+                        const responseData= await githubApi.deleteUserData(1234);
+                        if(responseData.isSuccess){
                             localStorage.removeItem("github");
                             setGithubAccountName(undefined);
                             setGithubAccountAvatar(undefined);
@@ -74,15 +76,30 @@ const SettingsPage:React.FC=()=>{
     const [qiitaAccountAvatar,setQiitaAccountAvatar]=useState<string|undefined>();
     const navigate=useNavigate();
 
-
     const handleClickQiitaAuth=():void=>{
         if(!qiitaAccountName){
             navigate("/auth/qiita");
         }else{
-            // TODO:連携解除をバックエンドに送る
-            setQiitaAccountName(undefined);
-            setQiitaAccountAvatar(undefined);
-        }
+            const isDeleteQiitaAccount=window.confirm("Qiitaとの連携を解除しますか？");
+            if(isDeleteQiitaAccount){
+                try{
+                    (async()=>{
+                        // TODO:仮ユーザIDを差し替える
+                        const responseData= await qiitaApi.deleteUserData(1234);
+                        if(responseData.isSuccess){
+                            localStorage.removeItem("qiita");
+                            setQiitaAccountName(undefined);
+                            setQiitaAccountAvatar(undefined);
+                            alert("Qiitaとの連携を解除しました。");            
+                        }else{
+                            alert("処理に失敗しました。");
+                        };
+                    })();
+                }catch(error){
+                    alert(`処理に失敗しました。 Error:${error}`);
+                };
+            };
+        };
     }
 
     // ----------Qiitaの処理----------
