@@ -74,15 +74,13 @@ const MySkillsPage:React.FC=()=>{
         }
     },[skillNameUserSelected]);
 
-    // ---------------レイアウト用---------------
+    // ---------------スタイル用---------------
     const [skillLineChartHeight,setSkillLineChartHeight]=useState<number>();
     const handleSkillLineChartHeight=(heigth:number):void=>{
         setSkillLineChartHeight(heigth);
-        console.log(heigth)
     };
     const isMediumScreen = useMediaQuery({ query: '(min-width: 748px)' })
-
-    // ---------------レイアウト用---------------
+    // ---------------スタイル用---------------
 
     return(
         <div className="w-[372px] md:w-[700px] lg:w-[850px] flex flex-col md:flex-row p-2 rounded-md border-2 border-gray-200 items-center"

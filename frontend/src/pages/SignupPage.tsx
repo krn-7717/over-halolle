@@ -13,7 +13,7 @@ const SignupPage:React.FC=()=>{
         }else if(!formJson.password){
             setErrorMessage("パスワードを入力してください");
         }else if(formJson.password!==formJson.checkPassword){
-            setErrorMessage("パスワードが間違っています");
+            setErrorMessage("パスワードが一致しません");
         }
         else{
             // TODO:APIに投げる

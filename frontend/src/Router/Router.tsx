@@ -6,6 +6,7 @@ import MainLayout from "../pages/MainLayout";
 import SettingsPage from "../pages/main/SettingsPage";
 import MySkillsPage from "../pages/main/MySkillsPage";
 import ErrorPage from "../pages/ErrorPage";
+import GithubAuth from "../auth/GithubAuth";
 
 const Router=createBrowserRouter([
     {
@@ -34,6 +35,10 @@ const Router=createBrowserRouter([
             element:<MySkillsPage />
           }
       ]
+    },
+    {
+      path:"/auth/github/callback",
+      element:<GithubAuth />
     }
   ]);
 
