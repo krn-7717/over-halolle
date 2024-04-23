@@ -24,7 +24,7 @@ const MainLayout:React.FC=()=>{
                 </div>
             </header>
             <div>
-                <div id="outlet">
+                <div id="outlet" className="flex flex-col items-center min-h-[85svh]">
                     <Outlet />
                 </div>
                 <footer className="bg-gray-100 w-full">
