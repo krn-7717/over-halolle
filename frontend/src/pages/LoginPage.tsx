@@ -23,16 +23,16 @@ const LoginPage:React.FC=()=>{
                     if(/2[0-9][0-9]/.test(String(responseData.status))){
                         localStorage.setItem("userId",String(responseData.data.userId));
                         localStorage.setItem("userName",String(responseData.data.userName));
-                        if(responseData.data.githubCode){
-                            // TODO:githubのデータ取得
-                        };
+                        if(responseData.data.github){
+                            localStorage.setItem("github",JSON.stringify(responseData.data.github));
+                        }
                         if(responseData.data.qiitaId){
                             const qiitaResponseData= await qiitaApi.getUserData(responseData.data.qiitaId);
                             if("id" in qiitaResponseData && "profile_image_url" in qiitaResponseData){
                                 const qiitaAccountData={userId:qiitaResponseData.id,avatarUrl:qiitaResponseData.profile_image_url};
                                 localStorage.setItem("qiita",JSON.stringify(qiitaAccountData));
                             };
-                        }
+                        };
                         navigate("/main");
                     }else if(responseData.status===401){
                         setErrorMessage("メールアドレスかパスワードが間違っています");
