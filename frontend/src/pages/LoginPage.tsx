@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage:React.FC=()=>{
     const [errorMessage,setErrorMessage]=useState<string|undefined>();
+    const navigate=useNavigate();
     const handleSubmit=(e:any):void=>{
         e.preventDefault();
         const form = e.target;
@@ -12,13 +14,14 @@ const LoginPage:React.FC=()=>{
         }else if(!formJson.password){
             setErrorMessage("パスワードを入力してください");
         }else{
-            // TODO:APIに投げる
+            // TODO:仮ユーザIDを置き換え
             const postData=formJson;
             console.log(postData);
             const responseData={status:200,data:{userId:1234,userName:"over-halolle"}};
             if(responseData.status===200){
                 localStorage.setItem("userId",String(responseData.data.userId));
                 localStorage.setItem("userName",String(responseData.data.userName));
+                navigate("/main");
             }else if(responseData.status===401){
                 setErrorMessage("メールアドレスかパスワードが間違っています");
             }else{
