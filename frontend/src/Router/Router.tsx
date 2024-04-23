@@ -4,7 +4,7 @@ import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
 import MainLayout from "../pages/MainLayout";
 import SettingsPage from "../pages/main/SettingsPage";
-import MySkillsPage from "../pages/main/MySkillsPage";
+import MainHomePage from "../pages/main/HomePage";
 import ErrorPage from "../pages/ErrorPage";
 import GithubAuth from "../auth/GithubAuth";
 import QiitaAuth from "../auth/QiitaAuth";
@@ -28,12 +28,12 @@ const Router=createBrowserRouter([
       element:<MainLayout />,
       children:[
         {
+          path:"",
+          element:<MainHomePage />
+        },
+        {
             path:"settings",
             element:<SettingsPage />
-          },
-          {
-            path:"my-skills",
-            element:<MySkillsPage />
           }
       ]
     },

@@ -5,7 +5,7 @@ import ShowOneSkillButton from "../../components/ShowOneSkillButton";
 import { ShowOneSkillButtonProps } from "../../types/showOneSkillButton";
 import {useMediaQuery} from "react-responsive";
 
-const MySkillsPage:React.FC=()=>{
+const HomePage:React.FC=()=>{
     const [summarizedSkillDataList,setSummarizedSkillDataList]=useState<SkillsLineChartProps>();
     const [skillButtonList,setSkillButtonList]=useState<Array<ShowOneSkillButtonProps>>([{skill:"All",color:"#f43f5e"}]);
     const [drawData,setDrawData]=useState<SkillsLineChartProps>([]);
@@ -103,4 +103,4 @@ const MySkillsPage:React.FC=()=>{
     )
 };
 
-export default MySkillsPage;
+export default HomePage;
