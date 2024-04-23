@@ -7,7 +7,7 @@ const ShowOneSkillButton:React.FC<{skillData:ShowOneSkillButtonProps,handleOnCli
     const styleButtonBasic:React.CSSProperties={ color:skillData.color, borderColor:skillData.color};
     return(
         <div>
-            <button className={`ShowOneSkillButton inline-flex items-center justify-center px-3 py-0.5 md:px-4 md:py-2 w-full text-sm font-medium tracking-wide transition-colors duration-100 rounded-md bg-white border-2`}
+            <button className={`ShowOneSkillButton inline-flex items-center justify-center px-3 py-0.5 md:px-4 md:py-2 w-full text-sm font-semibold md:font-bold tracking-wide transition-colors duration-100 rounded-md bg-white border-[2.5px]`}
             style={isButtonSelected?styleButtonSelected:isButtonHover?styleButtonSelected:styleButtonBasic}
             onMouseEnter={()=>{setIsButtonHover(true)}} onMouseLeave={()=>{setIsButtonHover(false)}}
             onClick={()=>{handleOnClick(skillData.skill)}}

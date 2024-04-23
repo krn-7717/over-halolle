@@ -51,7 +51,7 @@ const SkillsLineChart:React.FC<{drawData:SkillsLineChartProps,handleSkillLineCha
     },[drawData]);
 
     return(
-        <div className="w-full h-full">
+        <div className="w-full h-full bg-white rounded-lg">
             <ResponsiveContainer width={"100%"} aspect={2.2} onResize={(width,height)=>{handleSkillLineChartHeight(height)}}>
                 <AreaChart
                     margin={{ top: 20, right: 20, left: 5, bottom: 20 }}
@@ -59,18 +59,18 @@ const SkillsLineChart:React.FC<{drawData:SkillsLineChartProps,handleSkillLineCha
                     key={indexForAnimation}>
                     <defs>
                         <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#38bdf8" stopOpacity={0.7}/>
-                            <stop offset="95%" stopColor="#38bdf8" stopOpacity={0.2}/>
+                            <stop offset="5%" stopColor="#d8b4fe" stopOpacity={0.7}/>
+                            <stop offset="95%" stopColor="#d8b4fe" stopOpacity={0.2}/>
                         </linearGradient>
                     </defs>
-                    <Area type="monotone" dataKey="y" connectNulls stroke="#38bdf8" fillOpacity={0.5} fill="url(#colorUv)"
+                    <Area type="monotone" dataKey="y" connectNulls stroke="#d8b4fe" fillOpacity={1} fill="#d8b4fe"
                     isAnimationActive={true} animationDuration={1500}/>
                     <XAxis dataKey="x" tickLine={false} ticks={axisTicks} label={{value:"知識・能力",position:"bottom"}} />
                     <YAxis tickLine={false} tick={false} label={{value:"自信",position:"innerLeft"}} />
                     {drawData?.map((data)=>{
                         return(
                             <>
-                                <ReferenceLine segment={[{ x: String(data.level), y: 0 }, { x: String(data.level), y: data.level<=70?data.level<=35?100:60:85 }]} isFront={true} stroke={data.color} strokeOpacity={0.8} strokeWidth={2.5} label={{value:data.data,position:"top",style:{fill:data.color}}} />
+                                <ReferenceLine segment={[{ x: String(data.level), y: 0 }, { x: String(data.level), y: data.level<=70?data.level<=35?100:60:85 }]} isFront={true} stroke={data.color} strokeOpacity={1} strokeWidth={2.8} label={{value:data.data,position:"top",style:{fill:data.color,stroke:data.color}}} />
                             </>
                         )
                     })}
