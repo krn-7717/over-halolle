@@ -58,8 +58,7 @@ const SettingsPage:React.FC=()=>{
             if(isDeleteGithubAccount){
                 try{
                     (async()=>{
-                        // TODO:仮ユーザIDを差し替える
-                        const responseData= await githubApi.deleteUserData(1234);
+                        const responseData= await githubApi.deleteUserData(user.id);
                         if(/2[0-9][0-9]/.test(String(responseData.status))){
                             localStorage.removeItem("github");
                             setGithubAccountName(undefined);
@@ -90,8 +89,7 @@ const SettingsPage:React.FC=()=>{
             if(isDeleteQiitaAccount){
                 try{
                     (async()=>{
-                        // TODO:仮ユーザIDを差し替える
-                        const responseData= await qiitaApi.deleteUserData(1234);
+                        const responseData= await qiitaApi.deleteUserData(user.id);
                         if(/2[0-9][0-9]/.test(String(responseData.status))){
                             localStorage.removeItem("qiita");
                             setQiitaAccountName(undefined);
