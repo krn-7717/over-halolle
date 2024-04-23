@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, createContext, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, createContext, useState } from "react";
 
 export type User={
     id:number,
