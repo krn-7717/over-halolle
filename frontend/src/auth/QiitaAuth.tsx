@@ -19,7 +19,7 @@ const QiitaAuth:React.FC=()=>{
                         if("type" in responseData && "message" in responseData){
                             alert(`${userId} というアカウントは存在しません。`);
                         }else{
-                            const qiitaAccountData={userId:responseData.id,avatar_Url:responseData.profile_image_url};
+                            const qiitaAccountData={userId:responseData.id,avatarUrl:responseData.profile_image_url};
                             try{
                                 (async()=>{
                                     const responseData= await qiitaApi.setUserData(qiitaAccountData.userId);
