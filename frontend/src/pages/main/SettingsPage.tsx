@@ -2,11 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import * as userNameApi from "../../api/settings/userNameApi";
 import * as githubApi from "../../api/settings/githubApi";
 import * as qiitaApi from "../../api/settings/qiitaApi";
+import * as deleteAccountApi from "../../api/deleteAccountApi";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../providers/UserProvider";
 
 const SettingsPage:React.FC=()=>{
     const {user,setUser}=useContext(UserContext);
+    const navigate=useNavigate();
+
     // ----------ユーザ名の処理----------
     const handleUserNameSubmit=(e:any):void=>{
         e.preventDefault();
@@ -79,7 +82,6 @@ const SettingsPage:React.FC=()=>{
     // ----------Qiitaの処理----------
     const [qiitaAccountName,setQiitaAccountName]=useState<string|undefined>();
     const [qiitaAccountAvatar,setQiitaAccountAvatar]=useState<string|undefined>();
-    const navigate=useNavigate();
 
     const handleClickQiitaAuth=():void=>{
         if(!qiitaAccountName){
@@ -106,6 +108,28 @@ const SettingsPage:React.FC=()=>{
         };
     };
     // ----------Qiitaの処理----------
+
+    // ----------アカウント削除の処理----------
+    const handleClickDeleteAccount=():void=>{
+        const isDeleteAccount=window.confirm("アカウントを削除すると元には戻せません。\nアカウントを削除しますか？");
+        if(isDeleteAccount){
+            try{
+                (async()=>{
+                    const responseData= await deleteAccountApi.deleteAccount(user.id);
+                    if(/2[0-9][0-9]/.test(String(responseData.status))){
+                        localStorage.clear();
+                        alert("アカウントを削除しました;");
+                        navigate("/");
+                    }else{
+                        alert(`時間が経ってから、もう一度やり直してください。\n Status Code : ${responseData.status}`);
+                    };
+                })();
+            }catch(error){
+                alert(`時間が経ってから、もう一度やり直してください。\n Error Message : ${error}`);
+            };
+        };
+    };
+    // ----------アカウント削除の処理----------
 
     // ----------初回レンダリング時の処理----------
     const setGithubData=():void=>{
@@ -154,6 +178,7 @@ const SettingsPage:React.FC=()=>{
             </div>
             <div className="py-6 md:mt-10">
                 <h1 className="text-lg md:text-2xl md:pb-4">外部サービス</h1>
+                <span className="pl-1 block mt-5">GitHub・Qiitaと連携することで、スキルレベルをより正確に計測することができます。</span>
                 <div className="md:flex py-5">
                     <button onClick={handleClickGithubAuth} className="border border-gray-300 bg-white hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                         <svg className="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -166,7 +191,7 @@ const SettingsPage:React.FC=()=>{
                         <span className="pl-1">{githubAccountName?"@"+githubAccountName:undefined}</span>
                     </span>
                 </div>
-                <div className="md:flex">
+                <div className="md:flex mb-10">
                     <button onClick={handleClickQiitaAuth} className="border border-gray-300 bg-white hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                         <img src="/qiita/qiita-icon.png" className="w-4 h-4 me-2" />
                         {qiitaAccountName?"Qiitaとの連携を解除する":"Qiitaと連携する"}
@@ -175,6 +200,14 @@ const SettingsPage:React.FC=()=>{
                         <span className="md:pl-2">{qiitaAccountAvatar?<img src={qiitaAccountAvatar} className="w-8 h-8 rounded-full"/>:undefined}</span>
                         <span className="pl-1">{qiitaAccountName?"@"+qiitaAccountName:undefined}</span>
                     </span>
+                </div>
+            </div>
+            <span className="block w-full border-[0.8px] border-gray-300"/>
+            <div className="py-6 md:mt-10">
+                <h1 className="text-lg md:text-2xl md:pb-4">アカウント削除</h1>
+                <div className="my-4">
+                    <button onClick={handleClickDeleteAccount} className="focus:outline-none text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-500 font-bold rounded-lg text-sm px-5 py-2.5 me-2 mb-2">アカウントを削除する</button>
+                    <span className="block pt-2 pl-1">一度アカウントを削除すると、元には戻せません。</span>
                 </div>
             </div>
         </div>
