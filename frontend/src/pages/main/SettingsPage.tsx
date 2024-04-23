@@ -54,17 +54,21 @@ const SettingsPage:React.FC=()=>{
                     (async()=>{
                         // TODO:仮ユーザIDを差し替える
                         const responseData= await githubApi.deleteUserData(1234);
-                        if(responseData.isSuccess){
-                            localStorage.removeItem("github");
-                            setGithubAccountName(undefined);
-                            setGithubAccountAvatar(undefined);
-                            alert("GitHubとの連携を解除しました。");
+                        if(/4[0-9][0-9]/.test(String(responseData.status))){
+                            alert("通信に失敗しました。");
                         }else{
-                            alert("処理に失敗しました。");
-                        }
+                            if(responseData.isSuccess){
+                                localStorage.removeItem("github");
+                                setGithubAccountName(undefined);
+                                setGithubAccountAvatar(undefined);
+                                alert("GitHubとの連携を解除しました。");
+                            }else{
+                                alert("処理に失敗しました。");
+                            }
+                        };
                     })();
                 }catch(error){
-                    alert("処理に失敗しました。");
+                    alert("通信に失敗しました。");
                 };
             };
         };

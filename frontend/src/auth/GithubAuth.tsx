@@ -24,6 +24,7 @@ const GithubAuth:React.FC=()=>{
                     }else{
                         localStorage.setItem("github",JSON.stringify(responseData.data));
                         if(!ignore){
+                            alert("GitHubアカウントを連携しました。");
                             setIsProcessing(false);
                         }
                     }
