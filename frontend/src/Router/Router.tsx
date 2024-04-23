@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
@@ -14,22 +14,51 @@ const Router=createBrowserRouter([
       path:"/",
       element:<HomePage />,
       errorElement:<ErrorPage />,
+      loader:()=>{
+        if(localStorage.getItem("userId")!==null){
+        return redirect("/main")
+        }else{
+          return null
+        }
+      },
     },
     {
       path:"/login",
-      element:<LoginPage />
+      element:<LoginPage />,
+      loader:()=>{
+        if(localStorage.getItem("userId")!==null){
+        return redirect("/main")
+        }else{
+          return null
+        }
+      },
+      
     },
     {
       path:"/signup",
-      element:<SignupPage />
+      element:<SignupPage />,
+      loader:()=>{
+        if(localStorage.getItem("userId")!==null){
+        return redirect("/main")
+        }else{
+          return null
+        }
+      },
     },
     {
       path:"/main",
       element:<MainLayout />,
+      loader:()=>{
+        if(localStorage.getItem("userId")===null){
+        return redirect("/")
+        }else{
+          return null
+        }
+      },
       children:[
         {
           path:"",
-          element:<MainHomePage />
+          element:<MainHomePage />,
         },
         {
             path:"settings",
