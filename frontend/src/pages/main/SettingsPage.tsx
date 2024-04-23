@@ -100,8 +100,7 @@ const SettingsPage:React.FC=()=>{
                 };
             };
         };
-    }
-
+    };
     // ----------Qiitaの処理----------
 
     // ----------初回レンダリング時の処理----------
@@ -109,7 +108,7 @@ const SettingsPage:React.FC=()=>{
         const jsonlocalStrageGithubData=localStorage.getItem("github");
         if(jsonlocalStrageGithubData){
             const localStrageGithubData:githubApi.UserData=JSON.parse(jsonlocalStrageGithubData);
-            setGithubAccountName(localStrageGithubData.login);
+            setGithubAccountName(localStrageGithubData.userId);
             setGithubAccountAvatar(localStrageGithubData.avatar_url);
         };
     };
