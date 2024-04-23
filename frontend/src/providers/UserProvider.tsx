@@ -3,7 +3,7 @@ import React, { Dispatch, SetStateAction, createContext, useState } from "react"
 export type User={
     id:number,
     name:string,
-    avatarUrl:string|null
+    avatarUrl:string
 }
 
 interface UserContextValue{
@@ -27,7 +27,7 @@ const getInitialDataFromLocalStrage=()=>{
     return {
         id:Number(localStorageUserId),
         name:String(localStorageUserName),
-        avatarUrl:localStorageAvatarUrl
+        avatarUrl:String(localStorageAvatarUrl)
     }
 }
 

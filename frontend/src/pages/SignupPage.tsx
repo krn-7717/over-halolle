@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as signupApi from "../api/signupApi";
+import * as signupApi from "../api/account/signupApi";
 import { useNavigate } from "react-router-dom";
 
 const SignupPage:React.FC=()=>{

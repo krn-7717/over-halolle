@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import * as userNameApi from "../../api/settings/userNameApi";
 import * as githubApi from "../../api/settings/githubApi";
 import * as qiitaApi from "../../api/settings/qiitaApi";
-import * as deleteAccountApi from "../../api/deleteAccountApi";
+import * as deleteAccountApi from "../../api/account/deleteAccountApi";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../providers/UserProvider";
 
@@ -118,7 +118,7 @@ const SettingsPage:React.FC=()=>{
                     const responseData= await deleteAccountApi.deleteAccount(user.id);
                     if(/2[0-9][0-9]/.test(String(responseData.status))){
                         localStorage.clear();
-                        alert("アカウントを削除しました;");
+                        alert("アカウントを削除しました。");
                         navigate("/");
                     }else{
                         alert(`時間が経ってから、もう一度やり直してください。\n Status Code : ${responseData.status}`);

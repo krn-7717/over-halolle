@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as loginApi from "../api/loginApi";
+import * as loginApi from "../api/account/loginApi";
 import * as qiitaApi from "../api/settings/qiitaApi";
 
 const LoginPage:React.FC=()=>{
