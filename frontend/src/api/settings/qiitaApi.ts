@@ -37,14 +37,14 @@ export const getUserData=async(userId:string):Promise<GetUserDataResponse|GetUse
     return data;
 };
 
-export const setUserData=async(userId:string):Promise<{isSuccess:boolean}>=>{
+export const setUserData=async(userId:string):Promise<{status:number}>=>{
     const response = await fetch(BACKEND_URL);
     const data=response.json();
-    return {isSuccess:true};
+    return {status:response.status};
 }
 
-export const deleteUserData=async(userId:number):Promise<{isSuccess:boolean}>=>{
+export const deleteUserData=async(userId:number):Promise<{status:number}>=>{
     const response =await fetch(BACKEND_URL);
     const data=response.json();
-    return {isSuccess:true};
+    return {status:response.status};
 };

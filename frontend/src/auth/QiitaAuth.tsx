@@ -23,21 +23,21 @@ const QiitaAuth:React.FC=()=>{
                             try{
                                 (async()=>{
                                     const responseData= await qiitaApi.setUserData(qiitaAccountData.userId);
-                                    if(responseData.isSuccess){
+                                    if(/2[0-9][0-9]/.test(String(responseData.status))){
                                         localStorage.setItem("qiita",JSON.stringify(qiitaAccountData));
                                         alert("Qiitaアカウントを連携しました。");
                                         setIsProcessing(false);            
                                     }else{
-                                        alert("処理に失敗しました。");
-                                    };
+                                        alert(`Qiitaアカウントを連携できませんでした。\nStatus Code : ${responseData.status}`);
+                                    }
                                 })();
                             }catch(error){
-                                alert(`処理に失敗しました。Error:${error}`);
+                                alert(`Qiitaアカウントを連携できませんでした。\nError Message : ${error}`);
                             };
                         }
                     })();
                 }catch(error){
-                    alert("処理に失敗しました。");
+                    alert(`Qiitaアカウントを連携できませんでした。\nError Message : ${error}`);
                     setIsProcessing(false);
                 };
             };

@@ -16,19 +16,22 @@ const SettingsPage:React.FC=()=>{
         
         const newUserName=formJson.name;
         if(newUserName){
-            console.log(typeof(newUserName))
             if(typeof(newUserName)==="string"){
                 if(newUserName!==userName){
-                    (async()=>{
-                        const responseData= await userNameApi.setUserName(newUserName);
-                        if(responseData){
-                            localStorage.setItem("userName",newUserName);
-                            setUserName(newUserName);
-                            alert(`ユーザー名を ${newUserName} に設定しました。`)
-                        }else{
-                            alert("処理に失敗しました。");
-                        };
-                    })();
+                    try{
+                        (async()=>{
+                            const responseData= await userNameApi.setUserName(newUserName);
+                            if(/2[0-9][0-9]/.test(String(responseData.status))){
+                                localStorage.setItem("userName",newUserName);
+                                setUserName(newUserName);
+                                alert(`ユーザー名を ${newUserName} に設定しました。`)
+                            }else{
+                                alert(`ユーザー名を更新できませんでした。 \nStatus Code : ${responseData.status}`);
+                            }
+                        })();
+                    }catch(error){
+                        alert(`ユーザー名を更新できませんでした。 \nStatus Message : ${error}`);
+                    }
                 }else{
                     alert("新しいユーザ名を入力してください。");
                 };
@@ -54,21 +57,17 @@ const SettingsPage:React.FC=()=>{
                     (async()=>{
                         // TODO:仮ユーザIDを差し替える
                         const responseData= await githubApi.deleteUserData(1234);
-                        if(/4[0-9][0-9]/.test(String(responseData.status))){
-                            alert("通信に失敗しました。");
+                        if(/2[0-9][0-9]/.test(String(responseData.status))){
+                            localStorage.removeItem("github");
+                            setGithubAccountName(undefined);
+                            setGithubAccountAvatar(undefined);
+                            alert("GitHubとの連携を解除しました。");
                         }else{
-                            if(responseData.isSuccess){
-                                localStorage.removeItem("github");
-                                setGithubAccountName(undefined);
-                                setGithubAccountAvatar(undefined);
-                                alert("GitHubとの連携を解除しました。");
-                            }else{
-                                alert("処理に失敗しました。");
-                            }
-                        };
+                            alert(`GitHubとの連携を解除できませんでした。\nStatus Code : ${responseData.status}`);
+                        }
                     })();
                 }catch(error){
-                    alert("通信に失敗しました。");
+                    alert(`通信に失敗しました。 Error Message : ${error}`);
                 };
             };
         };
@@ -90,17 +89,17 @@ const SettingsPage:React.FC=()=>{
                     (async()=>{
                         // TODO:仮ユーザIDを差し替える
                         const responseData= await qiitaApi.deleteUserData(1234);
-                        if(responseData.isSuccess){
+                        if(/2[0-9][0-9]/.test(String(responseData.status))){
                             localStorage.removeItem("qiita");
                             setQiitaAccountName(undefined);
                             setQiitaAccountAvatar(undefined);
                             alert("Qiitaとの連携を解除しました。");            
                         }else{
-                            alert("処理に失敗しました。");
-                        };
+                            alert(`Qiitaとの連携を解除できませんでした。\nStatus Code : ${responseData.status}`);
+                        }
                     })();
                 }catch(error){
-                    alert(`処理に失敗しました。 Error:${error}`);
+                    alert(`処理に失敗しました。 Error Message : ${error}`);
                 };
             };
         };
