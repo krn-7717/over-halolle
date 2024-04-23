@@ -1,17 +1,17 @@
-import React, { createContext, useEffect, useState } from "react";
-
-export const UserContext=createContext({});
+import React, { Dispatch, SetStateAction, createContext, useEffect, useState } from "react";
 
 export type User={
-    id:number|null,
-    name:string|null,
+    id:number,
+    name:string,
     avatarUrl:string|null
 }
 
-export const UserProvider:React.FC<{children:React.ReactNode}>=(props)=>{
-    const {children}=props;
-    const [user,setUser]=useState<User>();
+interface UserContextValue{
+    user:User;
+    setUser:Dispatch<SetStateAction<User>> | ((user:User)=>{});
+};
 
+const getInitialDataFromLocalStrage=()=>{
     const localStorageUserId=localStorage.getItem("userId");
     const localStorageUserName=localStorage.getItem("userName");
     let localStorageAvatarUrl:string|null=null;
@@ -24,13 +24,21 @@ export const UserProvider:React.FC<{children:React.ReactNode}>=(props)=>{
     }else{
         localStorageAvatarUrl="/default_user_icon.jpeg";
     };
-    useEffect(()=>{
-        setUser({
-            id:Number(localStorageUserId),
-            name:localStorageUserName,
-            avatarUrl:localStorageAvatarUrl
-        });
-    },[]);
+    return {
+        id:Number(localStorageUserId),
+        name:String(localStorageUserName),
+        avatarUrl:localStorageAvatarUrl
+    }
+}
+
+export const UserContext=createContext<UserContextValue>({
+    user:getInitialDataFromLocalStrage(),
+    setUser:()=>{}
+});
+
+export const UserProvider:React.FC<{children:React.ReactNode}>=(props)=>{
+    const {children}=props;
+    const [user,setUser]=useState<User>(getInitialDataFromLocalStrage());
     return(
         <UserContext.Provider value={{user,setUser}}>
             {children}

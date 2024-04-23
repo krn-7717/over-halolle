@@ -1,11 +1,13 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
+import { UserProvider } from "../providers/UserProvider";
 
 const MainLayout:React.FC=()=>{
     const handleClickLogout=():void=>{
         localStorage.clear()
     }
     return(
+        <UserProvider>
         <div>
             <header className="sticky top-0 bg-white z-10 shadow p-2">
                 <div className="container mx-auto flex justify-between flex-row items-center">
@@ -52,6 +54,7 @@ const MainLayout:React.FC=()=>{
                 </footer>
             </div>
         </div>
+        </UserProvider>
     );
 };
 

@@ -37,14 +37,20 @@ export const getUserData=async(userId:string):Promise<GetUserDataResponse|GetUse
     return data;
 };
 
-export const setUserData=async(userId:string):Promise<{status:number}>=>{
+export const setUserData=async(userId:number,QiitaId:string):Promise<{status:number}>=>{
+    const postData={userId:userId,qiitaId:QiitaId};
+    console.log("<qiita api (setUserData)> POST : ",postData);
     const response = await fetch(BACKEND_URL);
     const data=response.json();
+    console.log("<qiita api (setUserData)> GET : ",{status:response.status});
     return {status:response.status};
 }
 
 export const deleteUserData=async(userId:number):Promise<{status:number}>=>{
+    const postData={userId:userId};
+    console.log("qiita api (deleteUserData) POST : ",postData);
     const response =await fetch(BACKEND_URL);
     const data=response.json();
+    console.log("qiita api (deleteUserData) GET : ",{status:response.status});
     return {status:response.status};
 };

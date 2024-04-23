@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import * as qiitaApi from "../api/settings/qiitaApi";
 import { Navigate } from "react-router-dom";
+import { UserContext } from "../providers/UserProvider";
 
 const QiitaAuth:React.FC=()=>{
+    const {user}=useContext(UserContext);
+
     const [isProcessing,setIsProcessing]=useState<boolean>(true);
 
     const handleSubmit=(e:any):void=>{
@@ -22,7 +25,7 @@ const QiitaAuth:React.FC=()=>{
                             const qiitaAccountData={userId:responseData.id,avatarUrl:responseData.profile_image_url};
                             try{
                                 (async()=>{
-                                    const responseData= await qiitaApi.setUserData(qiitaAccountData.userId);
+                                    const responseData= await qiitaApi.setUserData(user.id,qiitaAccountData.userId);
                                     if(/2[0-9][0-9]/.test(String(responseData.status))){
                                         localStorage.setItem("qiita",JSON.stringify(qiitaAccountData));
                                         alert("Qiitaアカウントを連携しました。");

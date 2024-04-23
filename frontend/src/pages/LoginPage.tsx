@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import * as loginApi from "../api/loginApi";
+import * as qiitaApi from "../api/settings/qiitaApi";
 
 const LoginPage:React.FC=()=>{
     const [errorMessage,setErrorMessage]=useState<string|undefined>();
@@ -13,20 +15,34 @@ const LoginPage:React.FC=()=>{
             setErrorMessage("メールアドレスを入力してください");
         }else if(!formJson.password){
             setErrorMessage("パスワードを入力してください");
-        }else{
-            // TODO:仮ユーザIDを置き換え
-            const postData=formJson;
-            console.log(postData);
-            const responseData={status:200,data:{userId:1234,userName:"over-halolle"}};
-            if(responseData.status===200){
-                localStorage.setItem("userId",String(responseData.data.userId));
-                localStorage.setItem("userName",String(responseData.data.userName));
-                navigate("/main");
-            }else if(responseData.status===401){
-                setErrorMessage("メールアドレスかパスワードが間違っています");
-            }else{
-                setErrorMessage("現在、サービスを使用することができません");
-            }
+        }
+        else{
+            try{
+                (async()=>{
+                    const responseData= await loginApi.login(String(formJson.email),String(formJson.password));
+                    if(/2[0-9][0-9]/.test(String(responseData.status))){
+                        localStorage.setItem("userId",String(responseData.data.userId));
+                        localStorage.setItem("userName",String(responseData.data.userName));
+                        if(responseData.data.githubCode){
+                            // TODO:githubのデータ取得
+                        };
+                        if(responseData.data.qiitaId){
+                            const qiitaResponseData= await qiitaApi.getUserData(responseData.data.qiitaId);
+                            if("id" in qiitaResponseData && "profile_image_url" in qiitaResponseData){
+                                const qiitaAccountData={userId:qiitaResponseData.id,avatarUrl:qiitaResponseData.profile_image_url};
+                                localStorage.setItem("qiita",JSON.stringify(qiitaAccountData));
+                            };
+                        }
+                        navigate("/main");
+                    }else if(responseData.status===401){
+                        setErrorMessage("メールアドレスかパスワードが間違っています");
+                    }else{
+                        setErrorMessage(`現在、サービスを利用することができません \nStatus Code : ${responseData.status}`);
+                    }
+                })();
+            }catch(error){
+                setErrorMessage(`現在、サービスを利用することができません \nError Message : ${error}`);
+            };
         };
     };
     return(

@@ -1,8 +1,10 @@
-import React,{ useEffect, useState } from "react";
+import React,{ useContext, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import * as githubApi from "../api/settings/githubApi";
+import { UserContext } from "../providers/UserProvider";
 
 const GithubAuth:React.FC=()=>{
+    const {user}=useContext(UserContext);
     const [isProcessing,setIsProcessing]=useState<boolean>(true);
     const search = useLocation().search;
     const UrlQuery = new URLSearchParams(search);
@@ -14,7 +16,7 @@ const GithubAuth:React.FC=()=>{
         if(githubCode){
             try{
                 (async()=>{
-                    const responseData= await githubApi.setUserData(githubCode);
+                    const responseData= await githubApi.setUserData(user.id,githubCode);
                     const status=responseData.status;
                     if(/2[0-9][0-9]/.test(String(status))){
                         localStorage.setItem("github",JSON.stringify(responseData.data));
