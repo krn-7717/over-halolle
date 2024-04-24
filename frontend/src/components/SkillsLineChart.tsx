@@ -59,8 +59,8 @@ const SkillsLineChart:React.FC<{drawData:SkillsLineChartProps,handleSkillLineCha
                     key={indexForAnimation}>
                     <defs>
                         <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#d8b4fe" stopOpacity={0.7}/>
-                            <stop offset="95%" stopColor="#d8b4fe" stopOpacity={0.2}/>
+                            <stop offset="30%" stopColor="#c084fc" stopOpacity={0.7}/>
+                            <stop offset="70%" stopColor="#f472b6" stopOpacity={0.7}/>
                         </linearGradient>
                     </defs>
                     <Area type="monotone" dataKey="y" connectNulls stroke="#d8b4fe" fillOpacity={1} fill="#d8b4fe"
