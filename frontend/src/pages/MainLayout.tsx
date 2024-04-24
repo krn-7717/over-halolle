@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, ScrollRestoration } from "react-router-dom";
 import { UserProvider } from "../providers/UserProvider";
 
 const MainLayout:React.FC=()=>{
@@ -32,7 +32,7 @@ const MainLayout:React.FC=()=>{
                     <Link to={"/main"} className="text-bold text-gray-500 hover:text-gray-800 px-8 border-r border-gray-300">
                         ホーム
                     </Link>
-                    <Link to={"/main"} className="text-bold text-gray-500 hover:text-gray-800 px-8 border-r border-gray-300">
+                    <Link to={"/main/input-skill"} className="text-bold text-gray-500 hover:text-gray-800 px-8 border-r border-gray-300">
                         スキル入力
                     </Link>
                     <Link to={"/main/settings"} className="text-bold text-gray-500 hover:text-gray-800 px-8">
@@ -42,6 +42,7 @@ const MainLayout:React.FC=()=>{
             </header>
             <div>
                 <div id="outlet" className="flex flex-col items-center min-h-[85svh]">
+                    <ScrollRestoration />
                     <Outlet />
                 </div>
                 <footer className="bg-gray-100 w-full">
