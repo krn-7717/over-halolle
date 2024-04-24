@@ -68,7 +68,9 @@ const HomePage:React.FC=()=>{
     };
 
 
-    useEffect(():void=>{
+    useEffect(()=>{
+        let ignore:boolean=false;
+
         if(isFirstRender.current){
             isFirstRender.current=false;
         }else{
@@ -77,24 +79,39 @@ const HomePage:React.FC=()=>{
             }else{
                 // TODO:postDataを使って、データを受け取る（後でuserIdも追加する）
                 const postData=skillNameUserSelected;
+                try{
+                    (async()=>{
+                        const responseData= await skillsApi.getForEach(user.id,skillNameUserSelected);
+                        if(/2[0-9][0-9]/.test(String(responseData.status))){
+                            const formatSkillsLineChartProps:SkillsLineChartProps=responseData.data.map((data,index)=>{
+                                const color=summarizedSkillDataList?.filter((data)=>data.data===skillNameUserSelected);
+                                return {
+                                    data:data.date,
+                                    level:data.level,
+                                    color:color?color[0].color:"#475569"
+                                };
+                            });
+                            setDrawData(formatSkillsLineChartProps);
+                        }else{
+                            if(!ignore){
+                                alert(`スキルデータを取得できませんでした。 \nStatus Code : ${responseData.status}`);
+                                setSkillNameUserSelected(skillButtonList[0].skill);
+                            }
+                        };
+                    })();
+                }catch(error){
+                    if(!ignore){
+                        alert(`スキルデータを取得できませんでした。 \nError Message: ${error}`);
+                        setSkillNameUserSelected(skillButtonList[0].skill);
+                    }
+                };
 
-                // ----------------仮データ----------------
-                let responseData:SkillsLineChartProps;
-                // 例）postData=Pythonのとき
-                if(postData==="Python"){
-                responseData=[
-                    {data:"23.1.1",level:10,color:"#3572A5"},
-                    {data:"23.2.1",level:20,color:"#3572A5"},
-                    {data:"23.3.1",level:30,color:"#3572A5"},
-                    {data:"23.4.1",level:40,color:"#3572A5"},
-                    {data:"23.5.10",level:45,color:"#3572A5"},
-                    {data:"23.10.10",level:60,color:"#3572A5"},
-                ]}
-                // ----------------仮データ----------------
+                return ()=>{
+                    ignore=true
+                }
 
-                setDrawData(responseData);
-            }
-        }
+            };
+        };
     },[skillNameUserSelected]);
 
     // ---------------スタイル用---------------
