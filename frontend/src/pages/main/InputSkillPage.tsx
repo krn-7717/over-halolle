@@ -5,6 +5,10 @@ import { GroupBase, OptionsOrGroups, SingleValue } from 'react-select';
 import FirstPage from "./input/FirstPage";
 import SecondPage from "./input/SecondPage";
 import ThirdPage from "./input/ThirdPage";
+import Box from '@mui/material/Box';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
 
 type SelectOptions=OptionsOrGroups<{
     value: string;
@@ -49,10 +53,26 @@ const InputSkillPage:React.FC=()=>{
         const form = e.target;
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
-    }
+    };
+    const steps = [
+        'Select',
+        'Check',
+        'Done!',
+      ];
     return(
         <div className="flex-1 w-full h-full flex flex-col justify-center items-center">
             <h1 className="text-lg md:text-2xl pb-8">スキルを入力する</h1>
+            <div className="w-11/12 md:w-1/3 pb-4">
+                <Box sx={{ width: '100%' }}>
+                    <Stepper activeStep={currentPage-1} alternativeLabel>
+                        {steps.map((label) => (
+                        <Step key={label}>
+                            <StepLabel>{label}</StepLabel>
+                        </Step>
+                        ))}
+                    </Stepper>
+                </Box>
+            </div>
             <div className="w-11/12 md:w-1/2 h-[30rem] bg-white rounded-md shadow-xl border-2 border-gray-100 flex flex-col justify-center items-center p-4">
                 <div className="flex-1 w-full px-8 md:px-16 py-4 md:py-8">
                     {currentPage===1?<FirstPage />:currentPage===2?<SecondPage />:<ThirdPage />}
