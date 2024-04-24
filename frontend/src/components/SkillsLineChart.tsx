@@ -27,9 +27,9 @@ const SkillsLineChart:React.FC<{drawData:SkillsLineChartProps,handleSkillLineCha
             axisTicks.push("完全に理解した");
         }else if(i===35){
             foundationData.push({
-                x: "何もわからない", y: 25
+                x: "無知", y: 25
             });
-            axisTicks.push("何もわからない");
+            axisTicks.push("無知");
         }else if(i===70){
             foundationData.push({
                 x:String(i),y:60
