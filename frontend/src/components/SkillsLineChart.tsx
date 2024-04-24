@@ -27,9 +27,9 @@ const SkillsLineChart:React.FC<{drawData:SkillsLineChartProps,handleSkillLineCha
             axisTicks.push("完全に理解した");
         }else if(i===35){
             foundationData.push({
-                x: "無知", y: 25
+                x: "無知の知", y: 25
             });
-            axisTicks.push("無知");
+            axisTicks.push("無知の知");
         }else if(i===70){
             foundationData.push({
                 x:String(i),y:60
@@ -65,7 +65,7 @@ const SkillsLineChart:React.FC<{drawData:SkillsLineChartProps,handleSkillLineCha
                     </defs>
                     <Area type="monotone" dataKey="y" connectNulls stroke="#d8b4fe" fillOpacity={1} fill="#d8b4fe"
                     isAnimationActive={true} animationDuration={1500}/>
-                    <XAxis dataKey="x" tickLine={false} ticks={axisTicks} label={{value:"知識・能力",position:"bottom"}} />
+                    <XAxis dataKey="x" tickLine={false} ticks={axisTicks} label={{value:"熟練度",position:"bottom"}} />
                     <YAxis tickLine={false} tick={false} label={{value:"自信",position:"innerLeft"}} />
                     {drawData?.map((data)=>{
                         return(

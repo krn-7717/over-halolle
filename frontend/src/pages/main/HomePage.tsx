@@ -77,8 +77,6 @@ const HomePage:React.FC=()=>{
             if(skillNameUserSelected==="All"){
                 setDrawData(summarizedSkillDataList);
             }else{
-                // TODO:postDataを使って、データを受け取る（後でuserIdも追加する）
-                const postData=skillNameUserSelected;
                 try{
                     (async()=>{
                         const responseData= await skillsApi.getForEach(user.id,skillNameUserSelected);
@@ -126,7 +124,7 @@ const HomePage:React.FC=()=>{
         <div>
             <div className="py-10">
                 <h1 className="text-lg md:text-2xl pb-8">現在のスキル</h1>
-                <div className="flex items-center border-2 w-fit px-3 py-1 rounded-t ml-2 bg-purple-300 border-purple-300">
+                <div className="flex items-center w-fit px-3 py-1 rounded-t ml-2 bg-purple-300">
                     <span><img src={user.avatarUrl} className="w-10 h-10 rounded-full" /></span>
                     <span className="pl-2 text-white font-bold">{user.name}</span>
                 </div>
