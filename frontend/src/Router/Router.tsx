@@ -8,6 +8,7 @@ import MainHomePage from "../pages/main/HomePage";
 import ErrorPage from "../pages/ErrorPage";
 import GithubAuth from "../auth/GithubAuth";
 import QiitaAuth from "../auth/QiitaAuth";
+import InputSkillPage from "../pages/main/InputSkillPage";
 
 const Router=createBrowserRouter([
     {
@@ -59,6 +60,10 @@ const Router=createBrowserRouter([
         {
           path:"",
           element:<MainHomePage />,
+        },
+        {
+          path:"input-skill",
+          element:<InputSkillPage />
         },
         {
             path:"settings",
