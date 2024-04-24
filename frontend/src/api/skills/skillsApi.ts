@@ -33,10 +33,10 @@ export type GetForEachResponse=Array<{
 
 export const getForEach=async(userId:number,skill:string):Promise<{status:number,data:GetForEachResponse}>=>{
     const postData={userId:userId,skill:skill};
-    console.log("<skills api (getForEEach)> POST : ",postData);
+    console.log("<skills api (getForEach)> POST : ",postData);
     const response= await fetch(BACKEND_URL);
     const data=response.json();
-    console.log("<skills api (getForEEach)> GET : ",{
+    console.log("<skills api (getForEach)> GET : ",{
         status:response.status,data:
         [{date:"23.1.1",level:10},{date:"23.2.1",level:20},{date:"23.3.1",level:30},{date:"23.4.1",level:40},{date:"23.5.10",level:45},{date:"23.10.10",level:60}]
     });
@@ -56,7 +56,9 @@ export const getForEach=async(userId:number,skill:string):Promise<{status:number
 export type GetSkillsListResponse=Array<string>;
 
 export const getSkillsList=async():Promise<{status:number,data:GetSkillsListResponse}>=>{
+    console.log("<skills api (getForEach)> POST : ","なし");
     const response= await fetch(BACKEND_URL);
     const data=response.json();
+    console.log("<skills api (getSkillsList)> GET : ",{status:response.status,data:["Python","C#","C","C++","Go","JavaScript","TypeScript","Docker","FireBase","AWS"]});
     return {status:response.status,data:["Python","C#","C","C++","Go","JavaScript","TypeScript","Docker","FireBase","AWS"]};
 };
