@@ -52,3 +52,11 @@ export const getForEach=async(userId:number,skill:string):Promise<{status:number
         ]
     };
 };
+
+export type GetSkillsListResponse=Array<string>;
+
+export const getSkillsList=async():Promise<{status:number,data:GetSkillsListResponse}>=>{
+    const response= await fetch(BACKEND_URL);
+    const data=response.json();
+    return {status:response.status,data:["Python","C#","C","C++","Go","JavaScript","TypeScript","Docker","FireBase","AWS"]};
+};

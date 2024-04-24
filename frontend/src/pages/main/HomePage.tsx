@@ -148,7 +148,7 @@ const HomePage:React.FC=()=>{
                     <span><img src={user.avatarUrl} className="w-10 h-10 rounded-full" /></span>
                     <span className="pl-2 text-white font-bold">{user.name}</span>
                 </div>
-                <div className="w-[372px] md:w-[700px] lg:w-[850px] flex flex-col md:flex-row p-2 rounded-md border-2 border-purple-400 shadow-xl items-center"
+                <div className="w-[372px] md:w-[700px] lg:w-[850px] flex flex-col md:flex-row p-2 rounded-md border-[3px] border-purple-400 shadow-xl items-center"
                 style={isMediumScreen?{height:skillLineChartHeight&&skillLineChartHeight+20}:{height:skillLineChartHeight&&skillLineChartHeight+68}}>
                     <div className="m-1 md:ml-0 md:mr-2 flex items-center md:items-stretch md:flex-col md:flex-wrap h-full w-full overflow-scroll bg-white rounded-lg">
                         {skillButtonList?.map((skillData,index)=>{
