@@ -5,6 +5,7 @@ import ShowOneSkillButton from "../../components/ShowOneSkillButton";
 import { ShowOneSkillButtonProps } from "../../types/showOneSkillButton";
 import {useMediaQuery} from "react-responsive";
 import { UserContext } from "../../providers/UserProvider";
+import * as skillsApi from "../../api/skills/skillsApi";
 
 const HomePage:React.FC=()=>{
     const {user}=useContext(UserContext);
@@ -16,28 +17,47 @@ const HomePage:React.FC=()=>{
 
     const isFirstRender=useRef<boolean>(false);
 
-    useEffect(():void=>{
+    useEffect(()=>{
         isFirstRender.current=true
-        // TODO:要約したスキルデータを受け取る（postData=userId）
-        const responseData:SkillsLineChartProps=[
-            {data:"Python",level:60,color:"#3572A5"},
-            {data:"Docker",level:50,color:"#384d54"},
-            {data:"C#",level:10,color:"#178600"},
-            {data:"Linux",level:80,color:"pink"},
-            {data:"GitHub",level:80,color:"gray"},
-            {data:"Go",level:80,color:"#00ADD8"}
-        ];
-        setSummarizedSkillDataList(responseData);
-        setDrawData(responseData);
-
-        const pushskillButtonList:Array<ShowOneSkillButtonProps>=responseData.map((data)=>{
-            return {skill:data.data,color:data.color}
-        })
-        setSkillButtonList(
-            [
-                ...skillButtonList,
-                ...pushskillButtonList
-            ]);
+        let ignore:boolean=false;
+        try{
+            (async()=>{
+                const responseData= await skillsApi.getAll(user.id);
+                if(/2[0-9][0-9]/.test(String(responseData.status))){
+                    if(responseData.data){
+                        const formatSkillsLineChartProps:SkillsLineChartProps=responseData.data.map((data,index)=>{
+                            return {data:data.skill,level:data.level,color:data.color};
+                        });
+                        setSummarizedSkillDataList(formatSkillsLineChartProps);
+                        setDrawData(formatSkillsLineChartProps);
+                        const formatShowOneSkillButtonProps:Array<ShowOneSkillButtonProps>=responseData.data.map((data,index)=>{
+                            return {skill:data.skill,color:data.color};
+                        });
+                        setSkillButtonList(
+                            [
+                                ...skillButtonList,
+                                ...formatShowOneSkillButtonProps   
+                            ]
+                            );
+                    }else{
+                        setSummarizedSkillDataList(undefined);
+                        setDrawData(undefined);
+                    };
+                }else{
+                    if(!ignore){
+                        alert(`スキルデータを取得できませんでした。 \nStatus Code : ${responseData.status}`);
+                    }
+                };
+            })();
+        }catch(error){
+            if(!ignore){
+                alert(`スキルデータを取得できませんでした。 \nError Message: ${error}`);
+            }
+        };
+        
+        return ()=>{
+            ignore=true
+        };
     },[]);
 
 
