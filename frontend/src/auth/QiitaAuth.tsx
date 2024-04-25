@@ -25,7 +25,7 @@ const QiitaAuth:React.FC=()=>{
                             const qiitaAccountData={userId:responseData.id,avatarUrl:responseData.profile_image_url};
                             try{
                                 (async()=>{
-                                    const responseData= await qiitaApi.setUserData(user.id,qiitaAccountData.userId);
+                                    const responseData= await qiitaApi.saveUserData(user.id,qiitaAccountData.userId);
                                     if(/2[0-9][0-9]/.test(String(responseData.status))){
                                         localStorage.setItem("qiita",JSON.stringify(qiitaAccountData));
                                         alert("Qiitaアカウントを連携しました。");

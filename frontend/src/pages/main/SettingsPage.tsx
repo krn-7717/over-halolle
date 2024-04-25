@@ -23,7 +23,7 @@ const SettingsPage:React.FC=()=>{
                 if(newUserName!==user.name){
                     try{
                         (async()=>{
-                            const responseData= await userNameApi.setUserName(user.id,newUserName);
+                            const responseData= await userNameApi.saveUserName(user.id,newUserName);
                             if(/2[0-9][0-9]/.test(String(responseData.status))){
                                 localStorage.setItem("userName",newUserName);
                                 setUser({

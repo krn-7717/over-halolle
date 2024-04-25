@@ -5,13 +5,13 @@ export type UserData={
 
 const BACKEND_URL=import.meta.env.VITE_BACKEND_URL;
 
-export const setUserData=async(userId:number,code:string):Promise<{status:number,data:UserData}>=>{
+export const saveUserData=async(userId:number,code:string):Promise<{status:number,data:UserData}>=>{
     const postData={userId:userId,code:code};
-    console.log("<github api (setUserData)> POST : ",postData);
+    console.log("<github api (saveUserData)> POST : ",postData);
     // fetch例
     const response= await fetch(BACKEND_URL);
     const data=response.json();
-    console.log("<github api (setUserData)> GET : ",{status:response.status,data:{userId: "ayakakawabe",avatarUrl: "https://avatars.githubusercontent.com/u/103473179?v=4"}});
+    console.log("<github api (saveUserData)> GET : ",{status:response.status,data:{userId: "ayakakawabe",avatarUrl: "https://avatars.githubusercontent.com/u/103473179?v=4"}});
     return {status:response.status,data:{userId: "ayakakawabe",avatarUrl: "https://avatars.githubusercontent.com/u/103473179?v=4"}};
 };
 

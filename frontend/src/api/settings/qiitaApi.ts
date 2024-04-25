@@ -37,12 +37,12 @@ export const getUserData=async(userId:string):Promise<GetUserDataResponse|GetUse
     return data;
 };
 
-export const setUserData=async(userId:number,QiitaId:string):Promise<{status:number}>=>{
+export const saveUserData=async(userId:number,QiitaId:string):Promise<{status:number}>=>{
     const postData={userId:userId,qiitaId:QiitaId};
-    console.log("<qiita api (setUserData)> POST : ",postData);
+    console.log("<qiita api (saveUserData)> POST : ",postData);
     const response = await fetch(BACKEND_URL);
     const data=response.json();
-    console.log("<qiita api (setUserData)> GET : ",{status:response.status});
+    console.log("<qiita api (saveUserData)> GET : ",{status:response.status});
     return {status:response.status};
 }
 

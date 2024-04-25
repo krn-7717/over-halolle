@@ -24,6 +24,7 @@ const InputSkillPage:React.FC=()=>{
     const [currentPage,setCurrentPage]=useState<number>(1);
 
     const [selectOptions,setselectOptions]=useState<SelectOptions>([]);
+
     const [userSelected,setUserSelected]=useState<string|null>(null);
 
     useEffect(()=>{
@@ -44,16 +45,6 @@ const InputSkillPage:React.FC=()=>{
         };
     },[]);
     
-    const handleChangeSelect=(data:SingleValue<{ value: string; label: string; }>)=>{
-        setUserSelected(data?data.value:null);
-    };
-
-    const handleSubmit=(e:any):void=>{
-        e.preventDefault();
-        const form = e.target;
-        const formData = new FormData(form);
-        const formJson = Object.fromEntries(formData.entries());
-    };
     const steps = [
         'Select',
         'Check',

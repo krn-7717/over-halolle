@@ -16,7 +16,7 @@ const GithubAuth:React.FC=()=>{
         if(githubCode){
             try{
                 (async()=>{
-                    const responseData= await githubApi.setUserData(user.id,githubCode);
+                    const responseData= await githubApi.saveUserData(user.id,githubCode);
                     const status=responseData.status;
                     if(/2[0-9][0-9]/.test(String(status))){
                         localStorage.setItem("github",JSON.stringify(responseData.data));
