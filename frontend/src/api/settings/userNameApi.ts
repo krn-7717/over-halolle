@@ -5,6 +5,6 @@ export const saveUserName=async(userId:number,newUserName:string):Promise<{statu
     console.log("<username api (saveUserName)> POST : ",postData);
     const response= await fetch(BACKEND_URL);
     const data=response.json(); 
-    console.log("<username api (saveUserName)> GET : ",{status:response.status});
+    console.log("<username api (saveUserName)> Response : ",{status:response.status});
     return {status:response.status};
 };

@@ -42,7 +42,7 @@ export const saveUserData=async(userId:number,QiitaId:string):Promise<{status:nu
     console.log("<qiita api (saveUserData)> POST : ",postData);
     const response = await fetch(BACKEND_URL);
     const data=response.json();
-    console.log("<qiita api (saveUserData)> GET : ",{status:response.status});
+    console.log("<qiita api (saveUserData)> Response : ",{status:response.status});
     return {status:response.status};
 }
 
@@ -51,6 +51,6 @@ export const deleteUserData=async(userId:number):Promise<{status:number}>=>{
     console.log("qiita api (deleteUserData) POST : ",postData);
     const response =await fetch(BACKEND_URL);
     const data=response.json();
-    console.log("qiita api (deleteUserData) GET : ",{status:response.status});
+    console.log("qiita api (deleteUserData) Response : ",{status:response.status});
     return {status:response.status};
 };

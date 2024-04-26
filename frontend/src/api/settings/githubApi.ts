@@ -11,7 +11,7 @@ export const saveUserData=async(userId:number,code:string):Promise<{status:numbe
     // fetch例
     const response= await fetch(BACKEND_URL);
     const data=response.json();
-    console.log("<github api (saveUserData)> GET : ",{status:response.status,data:{userId: "ayakakawabe",avatarUrl: "https://avatars.githubusercontent.com/u/103473179?v=4"}});
+    console.log("<github api (saveUserData)> Response : ",{status:response.status,data:{userId: "ayakakawabe",avatarUrl: "https://avatars.githubusercontent.com/u/103473179?v=4"}});
     return {status:response.status,data:{userId: "ayakakawabe",avatarUrl: "https://avatars.githubusercontent.com/u/103473179?v=4"}};
 };
 
@@ -21,6 +21,6 @@ export const deleteUserData=async(userId:number):Promise<{status:number}>=>{
     // fetch例
     const response= await fetch(BACKEND_URL);
     const data=response.json();
-    console.log("<github api (deleteUserData)> POST : ",{status:response.status});
+    console.log("<github api (deleteUserData)> Response : ",{status:response.status});
     return {status:response.status};
 };

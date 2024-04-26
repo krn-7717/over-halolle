@@ -1,8 +1,8 @@
-import React, { forwardRef, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../providers/UserProvider";
 import * as skillsApi from "../../api/skills/skillsApi";
-import { GroupBase, OptionsOrGroups, SingleValue } from 'react-select';
-import FirstPage from "./input/FirstPage";
+import { SingleValue } from 'react-select';
+import FirstPage,{SelectOptions,SelectValue} from "./input/FirstPage";
 import SecondPage from "./input/SecondPage";
 import ThirdPage from "./input/ThirdPage";
 import Box from '@mui/material/Box';
@@ -10,14 +10,15 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 
-type SelectOptions=OptionsOrGroups<{
-    value: string;
-    label: string;
-}, GroupBase<{
-    value: string;
-    label: string;
-}>> | undefined;
 
+export type InputData={
+    skill: string|undefined;
+    understanding: number;
+    confidence: number;
+    isTutorial: boolean;
+    isUse: boolean;
+    isDevelop: boolean;
+}
 const InputSkillPage:React.FC=()=>{
     const {user}=useContext(UserContext);
 
@@ -25,7 +26,14 @@ const InputSkillPage:React.FC=()=>{
 
     const [selectOptions,setselectOptions]=useState<SelectOptions>([]);
 
-    const [userSelected,setUserSelected]=useState<string|null>(null);
+    const [inputData,setInputData]=useState<InputData>({
+        skill: undefined,
+        understanding: 50,
+        confidence: 50,
+        isTutorial: false,
+        isUse: false,
+        isDevelop: false,
+    });
 
     useEffect(()=>{
         try{
@@ -44,12 +52,74 @@ const InputSkillPage:React.FC=()=>{
             alert(`現在、サービスを利用することができません。\nError Message : ${error}`);
         };
     },[]);
-    
+
     const steps = [
         'Select',
         'Check',
         'Done!',
       ];
+
+    const handleChangeSkill=(e:SelectValue):void=>{
+        setInputData(
+            {
+                ...inputData,
+                skill:e?.value
+            });
+    };
+    const handleChangeUnderstanding=(e:React.ChangeEvent<HTMLInputElement>):void=>{
+        setInputData(
+            {
+                ...inputData,
+                understanding:Number(e.target.value)
+            });
+    };
+    const handleChangeConfidence=(e:React.ChangeEvent<HTMLInputElement>):void=>{
+        setInputData(
+            {
+                ...inputData,
+                confidence:Number(e.target.value)
+            });
+    };
+    const handleChangeIsTutorial=(e:React.ChangeEvent<HTMLInputElement>):void=>{
+        setInputData(
+            {
+                ...inputData,
+                isTutorial:e.target.checked
+            });
+    };
+    const handleChangeIsUse=(e:React.ChangeEvent<HTMLInputElement>):void=>{
+        setInputData(
+            {
+                ...inputData,
+                isUse:e.target.checked
+            });
+    };
+    const handleChangeIsDevelop=(e:React.ChangeEvent<HTMLInputElement>):void=>{
+        setInputData(
+            {
+                ...inputData,
+                isDevelop:e.target.checked
+            });
+    };
+
+    const handleSubmit=():void=>{
+        if(inputData.skill!==undefined){
+            try{
+                (async()=>{
+                    const responseData= await skillsApi.saveSkillData(inputData);
+                    if(/2[0-9[0-9]/.test(String(responseData.status))){
+                        alert("スキルを登録しました");
+                    }else{
+                        alert(`スキルを登録することができませんでした。\nStatus Code : ${responseData.status}`);
+                    }
+                })();
+            }catch(error){
+                alert(`スキルを登録することができませんでした。\nError Message : ${error}`);
+            };
+        }else{
+            alert("スキルが未選択です。");
+        };
+    };
     return(
         <div className="flex-1 w-full h-full flex flex-col justify-center items-center">
             <h1 className="text-lg md:text-2xl pb-8">スキルを入力する</h1>
@@ -66,9 +136,30 @@ const InputSkillPage:React.FC=()=>{
             </div>
             <div className="w-11/12 md:w-1/2 h-[30rem] bg-white rounded-md shadow-xl border-2 border-gray-100 flex flex-col justify-center items-center p-4">
                 <div className="flex-1 w-full px-8 md:px-16 py-4 md:py-8">
-                    {currentPage===1?<FirstPage />:currentPage===2?<SecondPage />:<ThirdPage />}
+                    {currentPage===1
+                    ?<FirstPage
+                        skillDefault={inputData.skill}
+                        selectOptins={selectOptions}
+                        handleChangeSkill={handleChangeSkill}
+                        UnderstangingDefault={inputData.understanding}
+                        handleChangeUnderstanding={handleChangeUnderstanding}
+                        confidenceDefault={inputData.confidence}
+                        handleChangeConfidence={handleChangeConfidence}/>
+                    :currentPage===2?
+                        <SecondPage
+                            skill={inputData.skill?inputData.skill:""}
+                            isTutorialDefault={inputData.isTutorial}
+                            handleChangeIsTutorial={handleChangeIsTutorial}
+                            isUseDefault={inputData.isUse}
+                            handleChangeIsUse={handleChangeIsUse}
+                            isDevelopDefault={inputData.isDevelop}
+                            handleChangeIsDevelop={handleChangeIsDevelop}/>
+                            
+                        :<ThirdPage
+                            confirmData={inputData}
+                            handleSubmit={handleSubmit}/>}
                 </div>
-                <div className="w-full flex justify-between items-center">
+                <div className="w-full flex justify-between items-center" style={!inputData.skill?{display:"block"}:undefined}>
                     <div>
                         {currentPage===1?undefined:
                             <button type="button" onClick={()=>{setCurrentPage(()=>{return currentPage-1})}} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1 text-center inline-flex items-center">
@@ -82,6 +173,7 @@ const InputSkillPage:React.FC=()=>{
                     </div>
                     <div>
                         {currentPage===3?undefined:
+                            currentPage===1 && !inputData.skill?<span className="block text-center text-red-500">スキルを選択してください</span>:
                             <button type="button" onClick={()=>{setCurrentPage(()=>{return currentPage+1})}} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1 text-center inline-flex items-center">
                                 Next
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="rtl:rotate-180 w-3.5 h-3.5 ms-2">

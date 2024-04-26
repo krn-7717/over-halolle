@@ -11,7 +11,7 @@ export const getAll=async(userId:number):Promise<{status:number,data:GetAllRespo
     console.log("<skills api (getAll)> POST : ",postData);
     const response= await fetch(BACKEND_URL);
     const data=response.json();
-    console.log("<skills api (getAll)> GET : ",{status:response.status,
+    console.log("<skills api (getAll)> Response : ",{status:response.status,
         data:[{skill:"Python",level:60,color:"#3572A5"},{skill:"Docker",level:50,color:"#384d54"},{skill:"C#",level:10,color:"#178600"},{skill:"Linux",level:80,color:"pink"},{skill:"GitHub",level:80,color:"gray"},{skill:"Go",level:80,color:"#00ADD8"}]
     });
     return {
@@ -36,7 +36,7 @@ export const getForEach=async(userId:number,skill:string):Promise<{status:number
     console.log("<skills api (getForEach)> POST : ",postData);
     const response= await fetch(BACKEND_URL);
     const data=response.json();
-    console.log("<skills api (getForEach)> GET : ",{
+    console.log("<skills api (getForEach)> Response : ",{
         status:response.status,data:
         [{date:"23.1.1",level:10},{date:"23.2.1",level:20},{date:"23.3.1",level:30},{date:"23.4.1",level:40},{date:"23.5.10",level:45},{date:"23.10.10",level:60}]
     });
@@ -56,9 +56,27 @@ export const getForEach=async(userId:number,skill:string):Promise<{status:number
 export type GetSkillsListResponse=Array<string>;
 
 export const getSkillsList=async():Promise<{status:number,data:GetSkillsListResponse}>=>{
-    console.log("<skills api (getForEach)> POST : ","なし");
+    console.log("<skills api (getSkillsList)> GET : ","なし");
     const response= await fetch(BACKEND_URL);
     const data=response.json();
-    console.log("<skills api (getSkillsList)> GET : ",{status:response.status,data:["Python","C#","C","C++","Go","JavaScript","TypeScript","Docker","FireBase","AWS"]});
+    console.log("<skills api (getSkillsList)> Response : ",{status:response.status,data:["Python","C#","C","C++","Go","JavaScript","TypeScript","Docker","FireBase","AWS"]});
     return {status:response.status,data:["Python","C#","C","C++","Go","JavaScript","TypeScript","Docker","FireBase","AWS"]};
 };
+
+export type SaveSkillDataParams={
+    skill:string,
+    understanding:number,
+    confidence:number,
+    isTutorial:boolean,
+    isUse:boolean,
+    isDevelop:boolean
+};
+
+export const saveSkillData=async(inputData:SaveSkillDataParams):Promise<{status:number}>=>{
+    const postData=inputData;
+    console.log("<skills api (saveSkillData)> POST : ",postData);
+    const response= await fetch(BACKEND_URL);
+    const data=response.json();
+    console.log("<skills api (saveSkillData)> Response : ",{status:response.status});
+    return {status:response.status};
+}
