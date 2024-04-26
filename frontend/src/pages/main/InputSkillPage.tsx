@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../providers/UserProvider";
 import * as skillsApi from "../../api/skills/skillsApi";
-import { SingleValue } from 'react-select';
 import FirstPage,{SelectOptions,SelectValue} from "./input/FirstPage";
 import SecondPage from "./input/SecondPage";
 import ThirdPage from "./input/ThirdPage";
@@ -40,8 +39,8 @@ const InputSkillPage:React.FC=()=>{
             (async()=>{
                 const responseData= await skillsApi.getSkillsList();
                 if(/2[0-9][0-9]/.test(String(responseData.status))){
-                    const formatSelectOptions:SelectOptions=responseData.data.map((skill,index)=>{
-                        return {value:skill,label:skill};
+                    const formatSelectOptions:SelectOptions=responseData.data.map((data,index)=>{
+                        return {value:data.skill,label:data.skill};
                     });
                     setselectOptions(formatSelectOptions);
                 }else{

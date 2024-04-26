@@ -53,14 +53,22 @@ export const getForEach=async(userId:number,skill:string):Promise<{status:number
     };
 };
 
-export type GetSkillsListResponse=Array<string>;
+export type GetSkillsListResponse=Array<{skill:string,color:string}>;
 
 export const getSkillsList=async():Promise<{status:number,data:GetSkillsListResponse}>=>{
     console.log("<skills api (getSkillsList)> GET : ","なし");
     const response= await fetch(BACKEND_URL);
     const data=response.json();
-    console.log("<skills api (getSkillsList)> Response : ",{status:response.status,data:["Python","C#","C","C++","Go","JavaScript","TypeScript","Docker","FireBase","AWS"]});
-    return {status:response.status,data:["Python","C#","C","C++","Go","JavaScript","TypeScript","Docker","FireBase","AWS"]};
+    const dummyData=[
+        {skill:"Python",color:"#3572A5"},
+        {skill:"Docker",color:"#384d54"},
+        {skill:"C#",color:"#178600"},
+        {skill:"Linux",color:"pink"},
+        {skill:"GitHub",color:"gray"},
+        {skill:"Go",color:"#00ADD8"}
+    ]
+    console.log("<skills api (getSkillsList)> Response : ",{status:response.status,data:dummyData});
+    return {status:response.status,data:dummyData};
 };
 
 export type SaveSkillDataParams={
