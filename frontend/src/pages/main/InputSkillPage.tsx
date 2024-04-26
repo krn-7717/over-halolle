@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
+import { useNavigate } from "react-router-dom";
 
 
 export type InputData={
@@ -20,6 +21,7 @@ export type InputData={
 }
 const InputSkillPage:React.FC=()=>{
     const {user}=useContext(UserContext);
+    const navigate= useNavigate();
 
     const [currentPage,setCurrentPage]=useState<number>(1);
 
@@ -108,6 +110,7 @@ const InputSkillPage:React.FC=()=>{
                     const responseData= await skillsApi.saveSkillData(inputData);
                     if(/2[0-9[0-9]/.test(String(responseData.status))){
                         alert("スキルを登録しました");
+                        navigate("/main")
                     }else{
                         alert(`スキルを登録することができませんでした。\nStatus Code : ${responseData.status}`);
                     }
