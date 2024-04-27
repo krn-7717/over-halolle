@@ -11,11 +11,18 @@ type LoginResponse={
     qiitaId:string|null
 }
 
-export const login=async(email:string,password:string):Promise<{status:number,data:LoginResponse}>=>{
+export const login=async(email:string,password:string):Promise<LoginResponse>=>{
     const postData={email:email,password:password};
     console.log("<login api (login)> POST : ",postData);
     const response= await fetch(BACKEND_URL_DUMMY);
+    if(!response.ok){
+        if(response.status===401){
+            throw new Error("メールアドレスかパスワードが間違っています");
+        }else{
+            throw new Error("ログイン処理を完了できまでんでした");
+        };
+    };
     const data=response.json();
-    console.log("<login api (login)> Response : ",{status:response.status,data:{userId:9999,userName:"オーバーはろる",github:{userId:"ayakakawabe",avatarUrl:"https://avatars.githubusercontent.com/u/103473179?v=4"},qiitaId:"ayakaintheclouds"}});
-    return {status:response.status,data:{userId:9999,userName:"オーバーはろる",github:{userId:"ayakakawabe",avatarUrl:"https://avatars.githubusercontent.com/u/103473179?v=4"},qiitaId:"ayakaintheclouds"}};
+    console.log("<login api (login)> Response : ",{userId:9999,userName:"オーバーはろる",github:{userId:"ayakakawabe",avatarUrl:"https://avatars.githubusercontent.com/u/103473179?v=4"},qiitaId:"ayakaintheclouds"});
+    return {userId:9999,userName:"オーバーはろる",github:{userId:"ayakakawabe",avatarUrl:"https://avatars.githubusercontent.com/u/103473179?v=4"},qiitaId:"ayakaintheclouds"};
 };

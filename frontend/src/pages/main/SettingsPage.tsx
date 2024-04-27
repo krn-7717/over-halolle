@@ -115,17 +115,13 @@ const SettingsPage:React.FC=()=>{
         if(isDeleteAccount){
             try{
                 (async()=>{
-                    const responseData= await deleteAccountApi.deleteAccount(user.id);
-                    if(/2[0-9][0-9]/.test(String(responseData.status))){
+                    await deleteAccountApi.deleteAccount(user.id);
                         localStorage.clear();
                         alert("アカウントを削除しました。");
                         navigate("/");
-                    }else{
-                        alert(`時間が経ってから、もう一度やり直してください。\n Status Code : ${responseData.status}`);
-                    };
                 })();
             }catch(error){
-                alert(`時間が経ってから、もう一度やり直してください。\n Error Message : ${error}`);
+                console.log(error);
             };
         };
     };

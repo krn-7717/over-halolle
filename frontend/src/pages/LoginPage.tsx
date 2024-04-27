@@ -20,28 +20,23 @@ const LoginPage:React.FC=()=>{
             try{
                 (async()=>{
                     const responseData= await loginApi.login(String(formJson.email),String(formJson.password));
-                    if(/2[0-9][0-9]/.test(String(responseData.status))){
-                        localStorage.setItem("userId",String(responseData.data.userId));
-                        localStorage.setItem("userName",String(responseData.data.userName));
-                        if(responseData.data.github){
-                            localStorage.setItem("github",JSON.stringify(responseData.data.github));
+                        localStorage.setItem("userId",String(responseData.userId));
+                        localStorage.setItem("userName",String(responseData.userName));
+                        if(responseData.github){
+                            localStorage.setItem("github",JSON.stringify(responseData.github));
                         }
-                        if(responseData.data.qiitaId){
-                            const qiitaResponseData= await qiitaApi.getUserData(responseData.data.qiitaId);
+                        if(responseData.qiitaId){
+                            const qiitaResponseData= await qiitaApi.getUserData(responseData.qiitaId);
                             if("id" in qiitaResponseData && "profile_image_url" in qiitaResponseData){
                                 const qiitaAccountData={userId:qiitaResponseData.id,avatarUrl:qiitaResponseData.profile_image_url};
                                 localStorage.setItem("qiita",JSON.stringify(qiitaAccountData));
                             };
                         };
                         navigate("/main");
-                    }else if(responseData.status===401){
-                        setErrorMessage("メールアドレスかパスワードが間違っています");
-                    }else{
-                        setErrorMessage(`現在、サービスを利用することができません \nStatus Code : ${responseData.status}`);
-                    }
                 })();
-            }catch(error){
-                setErrorMessage(`現在、サービスを利用することができません \nError Message : ${error}`);
+            }catch(error:any){
+                console.log(error);
+                setErrorMessage(error);
             };
         };
     };
