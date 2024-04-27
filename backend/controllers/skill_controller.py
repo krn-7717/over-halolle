@@ -3,7 +3,7 @@ from backend import db
 from flask import Blueprint
 from flask_restful import fields, marshal_with
 
-bp = Blueprint("skills", __name__, url_prefix="/skills")
+skills_bp = Blueprint("skills", __name__, url_prefix="/skills")
 
 resource_fields = {
     "id": fields.Integer, 
@@ -11,7 +11,7 @@ resource_fields = {
     "color": fields.String
 }
 
-@bp.route("/", methods=["GET"])
+@skills_bp.route("/", methods=["GET"])
 @marshal_with(resource_fields)
 def index():
     skills = Skill.query.filter().all()

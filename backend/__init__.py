@@ -8,8 +8,13 @@ def create_app():
     app.config.from_object("backend.config.base_setting.Config")
     db.init_app(app)
     
-    from backend.controllers.skill_controller import bp
-    app.register_blueprint(bp)
+    from backend.controllers.skill_controller import skills_bp
+    from backend.controllers.user_controller import users_bp
+    from backend.interceptors.auth import login_bp
+    
+    app.register_blueprint(skills_bp)
+    app.register_blueprint(users_bp)
+    app.register_blueprint(login_bp)
     
     with app.app_context():
         db.create_all()
