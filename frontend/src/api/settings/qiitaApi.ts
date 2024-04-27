@@ -1,4 +1,6 @@
 const BACKEND_URL=import.meta.env.VITE_BACKEND_URL;
+const BACKEND_URL_DUMMY=import.meta.env.VITE_BACKEND_URL_DUMMY;
+
 const QIITA_TOKEN=import.meta.env.VITE_QIITA_TOKEN;
 
 export interface GetUserDataResponse{
@@ -37,19 +39,21 @@ export const getUserData=async(userId:string):Promise<GetUserDataResponse|GetUse
     return data;
 };
 
-export const saveUserData=async(userId:number,QiitaId:string):Promise<{status:number}>=>{
+export const saveUserData=async(userId:number,QiitaId:string):Promise<undefined>=>{
     const postData={userId:userId,qiitaId:QiitaId};
     console.log("<qiita api (saveUserData)> POST : ",postData);
-    const response = await fetch(BACKEND_URL);
+    const response = await fetch(BACKEND_URL_DUMMY);
+    if(!response.ok){
+        throw new Error("Qiitaアカウントを連携できませんでした");
+    };
     const data=response.json();
-    console.log("<qiita api (saveUserData)> Response : ",{status:response.status});
-    return {status:response.status};
+    console.log("<qiita api (saveUserData)> Response : なし");
 }
 
 export const deleteUserData=async(userId:number):Promise<{status:number}>=>{
     const postData={userId:userId};
     console.log("qiita api (deleteUserData) POST : ",postData);
-    const response =await fetch(BACKEND_URL);
+    const response =await fetch(BACKEND_URL_DUMMY);
     const data=response.json();
     console.log("qiita api (deleteUserData) Response : ",{status:response.status});
     return {status:response.status};

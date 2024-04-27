@@ -40,17 +40,13 @@ const InputSkillPage:React.FC=()=>{
         try{
             (async()=>{
                 const responseData= await skillsApi.getSkillsList();
-                if(/2[0-9][0-9]/.test(String(responseData.status))){
-                    const formatSelectOptions:SelectOptions=responseData.data.map((data,index)=>{
-                        return {value:data.skill,label:data.skill};
-                    });
-                    setselectOptions(formatSelectOptions);
-                }else{
-                    alert(`現在、サービスを利用することができません。\nStatus Code : ${responseData.status}`);
-                };
+                const formatSelectOptions:SelectOptions=responseData.map((data,index)=>{
+                    return {value:data.skill,label:data.skill};
+                });
+                setselectOptions(formatSelectOptions);
             })();
         }catch(error){
-            alert(`現在、サービスを利用することができません。\nError Message : ${error}`);
+            console.log(error);
         };
     },[]);
 
@@ -107,16 +103,12 @@ const InputSkillPage:React.FC=()=>{
         if(inputData.skill!==undefined){
             try{
                 (async()=>{
-                    const responseData= await skillsApi.saveSkillData(inputData);
-                    if(/2[0-9[0-9]/.test(String(responseData.status))){
+                    await skillsApi.saveSkillData(inputData);
                         alert("スキルを登録しました");
                         navigate("/main")
-                    }else{
-                        alert(`スキルを登録することができませんでした。\nStatus Code : ${responseData.status}`);
-                    }
                 })();
             }catch(error){
-                alert(`スキルを登録することができませんでした。\nError Message : ${error}`);
+                console.log(error);
             };
         }else{
             alert("スキルが未選択です。");

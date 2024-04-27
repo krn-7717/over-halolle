@@ -17,23 +17,15 @@ const GithubAuth:React.FC=()=>{
             try{
                 (async()=>{
                     const responseData= await githubApi.saveUserData(user.id,githubCode);
-                    const status=responseData.status;
-                    if(/2[0-9][0-9]/.test(String(status))){
-                        localStorage.setItem("github",JSON.stringify(responseData.data));
-                        if(!ignore){
-                            alert("GitHubアカウントを連携しました。");
-                            setIsProcessing(false);
-                        }
-                    }else{
-                        if(!ignore){
-                            alert(`GitHubアカウント情報を取得できませんでした。 Status Code:${status}`);
-                            setIsProcessing(false)
-                        }
+                    localStorage.setItem("github",JSON.stringify(responseData));
+                    if(!ignore){
+                        alert("GitHubアカウントを連携しました。");
+                        setIsProcessing(false);
                     }
                 })();
             }catch(error){
                 if(!ignore){
-                    alert(`GitHubアカウント情報を取得できませんでした。 Error Message:${error}}`);
+                    console.log(error);
                     setIsProcessing(false);
                 }
             };

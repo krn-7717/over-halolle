@@ -22,19 +22,13 @@ const SignupPage:React.FC=()=>{
             try{
                 (async()=>{
                     const responseData= await signupApi.signup(String(formJson.email),String(formJson.password));
-                    if(/2[0-9][0-9]/.test(String(responseData.status))){
-                        localStorage.setItem("userId",String(responseData.data.userId));
-                        localStorage.setItem("userName",String(responseData.data.userName));
+                        localStorage.setItem("userId",String(responseData.userId));
+                        localStorage.setItem("userName",String(responseData.userName));
                         navigate("/main");
-                    }else if(responseData.status===409){
-                        setErrorMessage("このメールアドレスはすでに使用されています");
-                    }else{
-                        setErrorMessage(`現在、サービスを使用することができません \nStatus Code : ${responseData.status}`);
-                    }
             })();
-            }catch(error){
-                setErrorMessage(`現在、サービスを使用することができません \nError Message : ${error}`);
-            }
+            }catch(error:any){
+                setErrorMessage(error);
+            };
         };
     };
     return(

@@ -24,20 +24,16 @@ const SettingsPage:React.FC=()=>{
                     try{
                         (async()=>{
                             const responseData= await userNameApi.saveUserName(user.id,newUserName);
-                            if(/2[0-9][0-9]/.test(String(responseData.status))){
-                                localStorage.setItem("userName",newUserName);
-                                setUser({
-                                    ...user,
-                                    name:newUserName
-                                })
-                                alert(`ユーザー名を ${newUserName} に設定しました。`)
-                            }else{
-                                alert(`ユーザー名を更新できませんでした。 \nStatus Code : ${responseData.status}`);
-                            }
+                            localStorage.setItem("userName",newUserName);
+                            setUser({
+                                ...user,
+                                name:newUserName
+                            })
+                            alert(`ユーザー名を ${newUserName} に設定しました。`)
                         })();
                     }catch(error){
-                        alert(`ユーザー名を更新できませんでした。 \nStatus Message : ${error}`);
-                    }
+                        console.log(error);
+                    };
                 }else{
                     alert("新しいユーザ名を入力してください。");
                 };
@@ -115,17 +111,13 @@ const SettingsPage:React.FC=()=>{
         if(isDeleteAccount){
             try{
                 (async()=>{
-                    const responseData= await deleteAccountApi.deleteAccount(user.id);
-                    if(/2[0-9][0-9]/.test(String(responseData.status))){
+                    await deleteAccountApi.deleteAccount(user.id);
                         localStorage.clear();
                         alert("アカウントを削除しました。");
                         navigate("/");
-                    }else{
-                        alert(`時間が経ってから、もう一度やり直してください。\n Status Code : ${responseData.status}`);
-                    };
                 })();
             }catch(error){
-                alert(`時間が経ってから、もう一度やり直してください。\n Error Message : ${error}`);
+                console.log(error);
             };
         };
     };
