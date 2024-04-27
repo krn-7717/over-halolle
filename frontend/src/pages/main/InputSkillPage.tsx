@@ -103,16 +103,12 @@ const InputSkillPage:React.FC=()=>{
         if(inputData.skill!==undefined){
             try{
                 (async()=>{
-                    const responseData= await skillsApi.saveSkillData(inputData);
-                    if(/2[0-9[0-9]/.test(String(responseData.status))){
+                    await skillsApi.saveSkillData(inputData);
                         alert("スキルを登録しました");
                         navigate("/main")
-                    }else{
-                        alert(`スキルを登録することができませんでした。\nStatus Code : ${responseData.status}`);
-                    }
                 })();
             }catch(error){
-                alert(`スキルを登録することができませんでした。\nError Message : ${error}`);
+                console.log(error);
             };
         }else{
             alert("スキルが未選択です。");

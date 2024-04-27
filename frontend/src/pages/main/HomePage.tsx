@@ -24,35 +24,29 @@ const HomePage:React.FC=()=>{
         try{
             (async()=>{
                 const responseData= await skillsApi.getAll(user.id);
-                if(/2[0-9][0-9]/.test(String(responseData.status))){
-                    if(responseData.data){
-                        const formatSkillsLineChartProps:SkillsLineChartProps=responseData.data.map((data,index)=>{
-                            return {data:data.skill,level:data.level,color:data.color};
-                        });
-                        setSummarizedSkillDataList(formatSkillsLineChartProps);
-                        setDrawData(formatSkillsLineChartProps);
-                        const formatShowOneSkillButtonProps:Array<ShowOneSkillButtonProps>=responseData.data.map((data,index)=>{
-                            return {skill:data.skill,color:data.color};
-                        });
-                        setSkillButtonList(
-                            [
-                                ...skillButtonList,
-                                ...formatShowOneSkillButtonProps   
-                            ]
-                            );
-                    }else{
-                        setSummarizedSkillDataList(undefined);
-                        setDrawData(undefined);
-                    };
+                if(responseData){
+                    const formatSkillsLineChartProps:SkillsLineChartProps=responseData.map((data,index)=>{
+                        return {data:data.skill,level:data.level,color:data.color};
+                    });
+                    setSummarizedSkillDataList(formatSkillsLineChartProps);
+                    setDrawData(formatSkillsLineChartProps);
+                    const formatShowOneSkillButtonProps:Array<ShowOneSkillButtonProps>=responseData.map((data,index)=>{
+                        return {skill:data.skill,color:data.color};
+                    });
+                    setSkillButtonList(
+                        [
+                            ...skillButtonList,
+                            ...formatShowOneSkillButtonProps   
+                        ]
+                        );
                 }else{
-                    if(!ignore){
-                        alert(`スキルデータを取得できませんでした。 \nStatus Code : ${responseData.status}`);
-                    }
+                    setSummarizedSkillDataList(undefined);
+                    setDrawData(undefined);
                 };
             })();
         }catch(error){
             if(!ignore){
-                alert(`スキルデータを取得できませんでした。 \nError Message: ${error}`);
+                console.log(error);
             }
         };
         
@@ -81,26 +75,19 @@ const HomePage:React.FC=()=>{
                 try{
                     (async()=>{
                         const responseData= await skillsApi.getForEach(user.id,skillNameUserSelected);
-                        if(/2[0-9][0-9]/.test(String(responseData.status))){
-                            const formatSkillsLineChartProps:SkillsLineChartProps=responseData.data.map((data,index)=>{
-                                const color=summarizedSkillDataList?.filter((data)=>data.data===skillNameUserSelected);
-                                return {
-                                    data:data.date,
-                                    level:data.level,
-                                    color:color?color[0].color:"#475569"
-                                };
-                            });
-                            setDrawData(formatSkillsLineChartProps);
-                        }else{
-                            if(!ignore){
-                                alert(`スキルデータを取得できませんでした。 \nStatus Code : ${responseData.status}`);
-                                setSkillNameUserSelected(skillButtonList[0].skill);
-                            }
-                        };
+                        const formatSkillsLineChartProps:SkillsLineChartProps=responseData.map((data,index)=>{
+                            const color=summarizedSkillDataList?.filter((data)=>data.data===skillNameUserSelected);
+                            return {
+                                data:data.date,
+                                level:data.level,
+                                color:color?color[0].color:"#475569"
+                            };
+                        });
+                        setDrawData(formatSkillsLineChartProps);
                     })();
                 }catch(error){
                     if(!ignore){
-                        alert(`スキルデータを取得できませんでした。 \nError Message: ${error}`);
+                        console.log(error);
                         setSkillNameUserSelected(skillButtonList[0].skill);
                     }
                 };
