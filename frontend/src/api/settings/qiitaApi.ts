@@ -39,13 +39,15 @@ export const getUserData=async(userId:string):Promise<GetUserDataResponse|GetUse
     return data;
 };
 
-export const saveUserData=async(userId:number,QiitaId:string):Promise<{status:number}>=>{
+export const saveUserData=async(userId:number,QiitaId:string):Promise<undefined>=>{
     const postData={userId:userId,qiitaId:QiitaId};
     console.log("<qiita api (saveUserData)> POST : ",postData);
     const response = await fetch(BACKEND_URL_DUMMY);
+    if(!response.ok){
+        throw new Error("Qiitaアカウントを連携できませんでした");
+    };
     const data=response.json();
-    console.log("<qiita api (saveUserData)> Response : ",{status:response.status});
-    return {status:response.status};
+    console.log("<qiita api (saveUserData)> Response : なし");
 }
 
 export const deleteUserData=async(userId:number):Promise<{status:number}>=>{
