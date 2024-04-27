@@ -63,14 +63,14 @@ export const getSkillsList=async():Promise<GetSkillsListResponse>=>{
         throw new Error("スキル情報を取得できません")
     }
     const data=response.json();
-    const dummyData=[
-        {skill:"Python",color:"#3572A5"},
-        {skill:"Docker",color:"#384d54"},
-        {skill:"C#",color:"#178600"},
-        {skill:"Linux",color:"pink"},
-        {skill:"GitHub",color:"gray"},
-        {skill:"Go",color:"#00ADD8"}
-    ]
+    // const dummyData=[
+    //     {skill:"Python",color:"#3572A5"},
+    //     {skill:"Docker",color:"#384d54"},
+    //     {skill:"C#",color:"#178600"},
+    //     {skill:"Linux",color:"pink"},
+    //     {skill:"GitHub",color:"gray"},
+    //     {skill:"Go",color:"#00ADD8"}
+    // ]
     console.log("<skills api (getSkillsList)> Response : ",data);
     return data;
 };
