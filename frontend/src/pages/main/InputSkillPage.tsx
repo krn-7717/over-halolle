@@ -40,17 +40,13 @@ const InputSkillPage:React.FC=()=>{
         try{
             (async()=>{
                 const responseData= await skillsApi.getSkillsList();
-                if(/2[0-9][0-9]/.test(String(responseData.status))){
-                    const formatSelectOptions:SelectOptions=responseData.data.map((data,index)=>{
-                        return {value:data.skill,label:data.skill};
-                    });
-                    setselectOptions(formatSelectOptions);
-                }else{
-                    alert(`現在、サービスを利用することができません。\nStatus Code : ${responseData.status}`);
-                };
+                const formatSelectOptions:SelectOptions=responseData.map((data,index)=>{
+                    return {value:data.skill,label:data.skill};
+                });
+                setselectOptions(formatSelectOptions);
             })();
         }catch(error){
-            alert(`現在、サービスを利用することができません。\nError Message : ${error}`);
+            console.log(error);
         };
     },[]);
 

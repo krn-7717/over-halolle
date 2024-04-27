@@ -1,4 +1,5 @@
 const BACKEND_URL=import.meta.env.VITE_BACKEND_URL;
+const BACKEND_URL_DUMMY=import.meta.env.VITE_BACKEND_URL_DUMMY;
 
 export type GetAllResponse=Array<{
     skill:string,
@@ -9,7 +10,7 @@ export type GetAllResponse=Array<{
 export const getAll=async(userId:number):Promise<{status:number,data:GetAllResponse}>=>{
     const postData={userId:userId};
     console.log("<skills api (getAll)> POST : ",postData);
-    const response= await fetch(BACKEND_URL);
+    const response= await fetch(BACKEND_URL_DUMMY);
     const data=response.json();
     console.log("<skills api (getAll)> Response : ",{status:response.status,
         data:[{skill:"Python",level:60,color:"#3572A5"},{skill:"Docker",level:50,color:"#384d54"},{skill:"C#",level:10,color:"#178600"},{skill:"Linux",level:80,color:"pink"},{skill:"GitHub",level:80,color:"gray"},{skill:"Go",level:80,color:"#00ADD8"}]
@@ -34,7 +35,7 @@ export type GetForEachResponse=Array<{
 export const getForEach=async(userId:number,skill:string):Promise<{status:number,data:GetForEachResponse}>=>{
     const postData={userId:userId,skill:skill};
     console.log("<skills api (getForEach)> POST : ",postData);
-    const response= await fetch(BACKEND_URL);
+    const response= await fetch(BACKEND_URL_DUMMY);
     const data=response.json();
     console.log("<skills api (getForEach)> Response : ",{
         status:response.status,data:
@@ -53,11 +54,14 @@ export const getForEach=async(userId:number,skill:string):Promise<{status:number
     };
 };
 
-export type GetSkillsListResponse=Array<{skill:string,color:string}>;
+export type GetSkillsListResponse=Array<{skill:string,color:string,id:number}>;
 
-export const getSkillsList=async():Promise<{status:number,data:GetSkillsListResponse}>=>{
+export const getSkillsList=async():Promise<GetSkillsListResponse>=>{
     console.log("<skills api (getSkillsList)> GET : ","なし");
-    const response= await fetch(BACKEND_URL);
+    const response= await fetch(BACKEND_URL+"/skills");
+    if(!response.ok){
+        throw new Error("スキル情報を取得できませんでした")
+    }
     const data=response.json();
     const dummyData=[
         {skill:"Python",color:"#3572A5"},
@@ -67,8 +71,8 @@ export const getSkillsList=async():Promise<{status:number,data:GetSkillsListResp
         {skill:"GitHub",color:"gray"},
         {skill:"Go",color:"#00ADD8"}
     ]
-    console.log("<skills api (getSkillsList)> Response : ",{status:response.status,data:dummyData});
-    return {status:response.status,data:dummyData};
+    console.log("<skills api (getSkillsList)> Response : ",data);
+    return data;
 };
 
 export type SaveSkillDataParams={
@@ -83,7 +87,7 @@ export type SaveSkillDataParams={
 export const saveSkillData=async(inputData:SaveSkillDataParams):Promise<{status:number}>=>{
     const postData=inputData;
     console.log("<skills api (saveSkillData)> POST : ",postData);
-    const response= await fetch(BACKEND_URL);
+    const response= await fetch(BACKEND_URL_DUMMY);
     const data=response.json();
     console.log("<skills api (saveSkillData)> Response : ",{status:response.status});
     return {status:response.status};
