@@ -148,7 +148,7 @@ const SettingsPage:React.FC=()=>{
     },[]);
     // ----------初回レンダリング時の処理----------
     return(
-        <div className="w-5/6 md:w-1/2 mt-6 md:pt-10">
+        <div className="w-5/6 md:w-1/2 my-6 md:pt-10 p-8 rounded bg-white">
             <div className="pt-6">
                 <h1 className="text-lg md:text-2xl md:pb-4">アカウント設定</h1>
                 <form method="POST" onSubmit={handleUserNameSubmit} className="py-5">

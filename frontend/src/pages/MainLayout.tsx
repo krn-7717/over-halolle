@@ -41,7 +41,7 @@ const MainLayout:React.FC=()=>{
                 </div>
             </header>
             <div>
-                <div id="outlet" className="flex flex-col items-center min-h-[85svh]">
+                <div id="outlet" className="flex flex-col items-center min-h-[85svh]  bg-gradient-to-r from-blue-100 to-purple-100">
                     <ScrollRestoration />
                     <Outlet />
                 </div>

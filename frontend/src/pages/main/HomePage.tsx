@@ -109,7 +109,7 @@ const HomePage:React.FC=()=>{
     // ---------------スタイル用---------------
 
     return(
-        <div className="flex-1 w-full bg-gradient-to-r from-blue-100 to-purple-100">
+        <div className="flex-1 w-full">
             <div className="w-full">
                 <div className="mb-2">
                 <div className="pt-14 pb-4">
