@@ -1,4 +1,5 @@
 from backend import db
+from backend.common.models.user_skill import UserSkill
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -9,7 +10,6 @@ class User(db.Model):
     github = db.Column(db.String(100))
     qiita = db.Column(db.String(100))
     zenn = db.Column(db.String(100))
-    skill = db.Column(db.String(100))
-    level = db.Column(db.Integer)
     create_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
+    user_skill = db.relationship("UserSkill")
