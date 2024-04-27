@@ -1,8 +1,10 @@
 from backend.common.models.user import User
+from backend.common.models.user_skill import UserSkill
 from backend import db
 from flask import Blueprint
 from flask import request
-from flask_restful import fields, marshal_with
+from flask_restful import fields
+from flask_restful import marshal_with
 
 users_bp = Blueprint("users", __name__, url_prefix="/users")
 
@@ -14,11 +16,24 @@ resource_fields = {
     "github": fields.String,
     "qiita": fields.String,
     "zenn": fields.String,
-    "skill": fields.String,
-    "level": fields.Integer,
     "created_at": fields.DateTime,
     "updated_at": fields.DateTime,
 }
+
+user_skill_fields = {
+    "id": fields.Integer,
+    "user_id": fields.Integer,
+    "color": fields.String,
+    "skill": fields.String, 
+    "created_at": fields.DateTime,
+    "updated_at": fields.DateTime,
+}
+
+@users_bp.route("/", methods=["GET"])
+@marshal_with(resource_fields)
+def show_all_user():
+    all_users = User.query.filter().all()
+    return all_users
 
 @users_bp.route("/<int:id>", methods=["GET"])
 @marshal_with(resource_fields)
@@ -54,3 +69,9 @@ def delete_user(id):
             "message": "User deletion successful."
         }
     }, 200
+
+@users_bp.route("/<int:id>/skills", methods=["GET"])
+@marshal_with(user_skill_fields)
+def add_user_skill(id):
+    user_skills = UserSkill.query.filter().all()
+    return user_skills
