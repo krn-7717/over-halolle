@@ -29,10 +29,10 @@ const MainLayout:React.FC=()=>{
                     </div>
                 </div>
                 <div className="container mx-auto flex flex-row justify-center">
-                    <Link to={"/main"} className="text-bold text-gray-500 hover:text-gray-800 px-8 border-r border-gray-300">
+                    <Link to={"/main"} className="text-bold text-gray-500 hover:text-gray-800 px-8 border-r border-purple-300">
                         ホーム
                     </Link>
-                    <Link to={"/main/input-skill"} className="text-bold text-gray-500 hover:text-gray-800 px-8 border-r border-gray-300">
+                    <Link to={"/main/input-skill"} className="text-bold text-gray-500 hover:text-gray-800 px-8 border-r border-purple-300">
                         スキル入力
                     </Link>
                     <Link to={"/main/settings"} className="text-bold text-gray-500 hover:text-gray-800 px-8">

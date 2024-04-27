@@ -28,10 +28,10 @@ const HomePage:React.FC=()=>{
                         <span className="ml-3 text-xl md:text-3xl">Skill Mapper</span>
                     </a>
                     <div>
-                        <Link to={"/login"} className="inline-flex justify-center items-center m-2 border-0 py-1 px-3 w-32 focus:outline-none rounded text-base text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-30">
+                        <Link to={"/login"} className="inline-flex justify-center items-center m-2 border-0 py-1 px-3 w-32 focus:outline-none rounded text-base text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-30">
                             ログイン
                         </Link>
-                        <Link to={"/signup"} className="inline-flex justify-center items-center m-2 border-0 py-1 px-3 w-32 focus:outline-none rounded text-base text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-30">
+                        <Link to={"/signup"} className="inline-flex justify-center items-center m-2 border-0 py-1 px-3 w-32 focus:outline-none rounded text-base text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-30">
                             サインアップ
                         </Link>
                     </div>
@@ -47,7 +47,7 @@ const HomePage:React.FC=()=>{
                             </svg>
                             <span className="ml-3 text-2xl md:text-5xl">Skill Mapper</span>
                         </div>
-                        <span className="text-gray-500 text-lg md:text-2xl text-center">Enjoy the journey of acquiring technical skills!</span>
+                        <span className="text-gray-700 text-lg md:text-2xl text-center">Enjoy the journey of acquiring technical skills!</span>
                         <div className="p-4 flex flex-wrap justify-between">
                             {exampleSkillList.map((data,index)=>{
                                 return (
@@ -60,10 +60,10 @@ const HomePage:React.FC=()=>{
                             <span className="text-gray-700 ml-2">etc...</span>
                         </div>
                         <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:m-10">
-                            <Link to={"/login"} className="inline-flex justify-center items-center py-3 px-5 sm:w-36 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
+                            <Link to={"/login"} className="inline-flex justify-center items-center py-3 px-5 sm:w-36 text-base font-medium text-center text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300">
                                 ログイン
                             </Link>
-                            <Link to={"/signup"} className="inline-flex justify-center items-center py-3 px-5 sm:w-36 sm:ms-4 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
+                            <Link to={"/signup"} className="inline-flex justify-center items-center py-3 px-5 sm:w-36 sm:ms-4 text-base font-medium text-center text-white rounded-lg bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300">
                                 サインアップ
                             </Link> 
                         </div>
