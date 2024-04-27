@@ -1,3 +1,4 @@
+from backend import db
 from backend.common.models.user import User
 from flask import Blueprint
 from flask import jsonify
@@ -18,7 +19,7 @@ def signup():
         }), 409
     else:
         new_user = User()
-        new_user.name = ""
+        new_user.name = "匿名ユーザ"
         new_user.email = email
         new_user.password = password
         db.session.add(new_user)
@@ -26,7 +27,7 @@ def signup():
         return {
             "status": 200,
             "data": {
-                "id": user.id,
-                "name": user.name,
+                "id": new_user.id,
+                "name": new_user.name,
             }
         }, 200
