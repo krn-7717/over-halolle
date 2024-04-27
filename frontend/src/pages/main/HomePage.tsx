@@ -109,13 +109,12 @@ const HomePage:React.FC=()=>{
     // ---------------スタイル用---------------
 
     return(
-        <div className="flex-1 w-full bg-sky-100">
+        <div className="flex-1 w-full bg-gradient-to-r from-blue-100 to-purple-100">
             <div className="w-full">
                 <div className="mb-2">
-                <div className="pt-10 pb-4 bg-sky-100">
-                <p className="text-center py-2 text-purple-800">スキルを入力するとグラフに反映されます！</p>
+                <div className="pt-14 pb-4">
                 <div className="flex justify-center items-center">
-                    <Link to={"/main/input-skill"} className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 font-medium rounded-lg text-lg px-5 py-2.5 text-center shadow-xl">
+                    <Link to={"/main/input-skill"} className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 font-medium rounded-lg text-lg px-8 py-3.5 text-center shadow-xl">
                         スキルを入力する
                     </Link>
                 </div>
