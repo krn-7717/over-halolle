@@ -20,19 +20,23 @@ const LoginPage:React.FC=()=>{
             try{
                 (async()=>{
                     const responseData= await loginApi.login(String(formJson.email),String(formJson.password));
-                        localStorage.setItem("userId",String(responseData.userId));
-                        localStorage.setItem("userName",String(responseData.userName));
-                        if(responseData.github){
-                            localStorage.setItem("github",JSON.stringify(responseData.github));
+                    if(responseData.status===401){
+                        setErrorMessage("メールアドレスかパスワードが間違っています");
+                    }else{
+                        localStorage.setItem("userId",String(responseData.data.id));
+                        localStorage.setItem("userName",String(responseData.data.name));
+                        if(responseData.data.github){
+                            localStorage.setItem("github",JSON.stringify(responseData.data.github));
                         }
-                        if(responseData.qiitaId){
-                            const qiitaResponseData= await qiitaApi.getUserData(responseData.qiitaId);
+                        if(responseData.data.qiitaId){
+                            const qiitaResponseData= await qiitaApi.getUserData(responseData.data.qiitaId);
                             if("id" in qiitaResponseData && "profile_image_url" in qiitaResponseData){
                                 const qiitaAccountData={userId:qiitaResponseData.id,avatarUrl:qiitaResponseData.profile_image_url};
                                 localStorage.setItem("qiita",JSON.stringify(qiitaAccountData));
                             };
                         };
                         navigate("/main");
+                    }
                 })();
             }catch(error:any){
                 console.log(error);
