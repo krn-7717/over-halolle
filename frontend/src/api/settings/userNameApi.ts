@@ -16,5 +16,4 @@ export const saveUserName=async(userId:number,newUserName:string):Promise<undefi
     };
     const data=response.json(); 
     console.log("<username api (saveUserName)> Response : なし");
-    console.log(data)
 };
