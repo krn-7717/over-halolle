@@ -41,3 +41,16 @@ def change_user_name(id):
             "name": renamed_user.name
         }
     }, 200
+
+@users_bp.route("/<int:id>", methods=["DELETE"])
+def delete_user(id):
+    user_id = request.json["userId"]
+    
+    User.query.filter(User.id==user_id).delete()
+    db.session.commit()
+    return {
+        "status": 200, 
+        "data": {
+            "message": "User deletion successful."
+        }
+    }, 200
