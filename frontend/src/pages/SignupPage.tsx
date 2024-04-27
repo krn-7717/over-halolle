@@ -22,9 +22,13 @@ const SignupPage:React.FC=()=>{
             try{
                 (async()=>{
                     const responseData= await signupApi.signup(String(formJson.email),String(formJson.password));
-                        localStorage.setItem("userId",String(responseData.userId));
-                        localStorage.setItem("userName",String(responseData.userName));
-                        navigate("/main");
+                    if(responseData.status===409){
+                        setErrorMessage("このメールアドレスはすでに使用されています");
+                    }else{
+                        localStorage.setItem("userId",String(responseData.data.id));
+                        localStorage.setItem("userName",String(responseData.data.name));
+                        navigate("/main/settings");
+                    }
             })();
             }catch(error:any){
                 setErrorMessage(error);
