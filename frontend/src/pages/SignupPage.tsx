@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import * as signupApi from "../api/account/signupApi";
+import { useNavigate } from "react-router-dom";
 
 const SignupPage:React.FC=()=>{
     const [errorMessage,setErrorMessage]=useState<string|undefined>();
+    const navigate=useNavigate();
 
     const handleSubmit=(e:any):void=>{
         e.preventDefault();
@@ -13,28 +16,29 @@ const SignupPage:React.FC=()=>{
         }else if(!formJson.password){
             setErrorMessage("パスワードを入力してください");
         }else if(formJson.password!==formJson.checkPassword){
-            setErrorMessage("パスワードが間違っています");
+            setErrorMessage("パスワードが一致しません");
         }
         else{
-            // TODO:APIに投げる
-            const postData={
-                email:formJson.email,
-                password:formJson.password
-            };
-            console.log(postData);
-            const responseData={status:200,data:{userId:1234,userName:"over-halolle"}};
-            if(responseData.status===200){
-                localStorage.setItem("userId",String(responseData.data.userId));
-                localStorage.setItem("userName",String(responseData.data.userName));    
-            }else if(responseData.status===409){
-                setErrorMessage("このメールアドレスはすでに使用されています");
-            }else{
-                setErrorMessage("現在、サービスを使用することができません");
-            };
+            try{
+                (async()=>{
+                    const responseData= await signupApi.signup(String(formJson.email),String(formJson.password));
+                    if(/2[0-9][0-9]/.test(String(responseData.status))){
+                        localStorage.setItem("userId",String(responseData.data.userId));
+                        localStorage.setItem("userName",String(responseData.data.userName));
+                        navigate("/main");
+                    }else if(responseData.status===409){
+                        setErrorMessage("このメールアドレスはすでに使用されています");
+                    }else{
+                        setErrorMessage(`現在、サービスを使用することができません \nStatus Code : ${responseData.status}`);
+                    }
+            })();
+            }catch(error){
+                setErrorMessage(`現在、サービスを使用することができません \nError Message : ${error}`);
+            }
         };
     };
     return(
-        <div className="h-svh">
+        <div className="h-svh bg-gray-50">
             <header className="sticky top-0 bg-white z-10 shadow">
                 <div className="container mx-auto flex justify-center p-4 items-center">
                     <a href="/" className="flex title-font font-medium items-center text-gray-900">
@@ -81,7 +85,7 @@ const SignupPage:React.FC=()=>{
                             <input type="password" name="checkPassword" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                         </div>
                     </div>
-                    <span className="text-red-600 h-8">{errorMessage}</span>
+                    <span className="text-red-600 h-10 whitespace-pre-wrap text-center">{errorMessage}</span>
                     <button type="submit" className="inline-flex items-center justify-center px-4 py-2 my-4 text-sm font-medium tracking-wide text-white transition-colors duration-200 bg-blue-600 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:shadow-outline focus:outline-none">
                         登録
                     </button>
