@@ -14,7 +14,13 @@ type LoginResponse={
 export const login=async(email:string,password:string):Promise<LoginResponse>=>{
     const postData={email:email,password:password};
     console.log("<login api (login)> POST : ",postData);
-    const response= await fetch(BACKEND_URL_DUMMY);
+    const response= await fetch(BACKEND_URL_DUMMY, {
+        method: "POST",
+        body: JSON.stringify(postData), 
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
     if(!response.ok){
         if(response.status===401){
             throw new Error("メールアドレスかパスワードが間違っています");
