@@ -109,12 +109,15 @@ const HomePage:React.FC=()=>{
     // ---------------スタイル用---------------
 
     return(
-        <div>
-            <div className="py-10">
-                <div className="py-5 mb-8 flex justify-center items-center">
-                    <Link to={"/main/input-skill"} className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 font-medium rounded-lg text-lg px-5 py-2.5 text-center shadow-xl">
+        <div className="flex-1 w-full">
+            <div className="w-full">
+                <div className="mb-2">
+                <div className="pt-14 pb-4">
+                <div className="flex justify-center items-center">
+                    <Link to={"/main/input-skill"} className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 font-medium rounded-lg text-lg px-8 py-3.5 text-center shadow-xl">
                         スキルを入力する
                     </Link>
+                </div>
                 </div>
                 <div className="flex flex-col justify-start items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" className="w-7 h-7 text-purple-500">
@@ -129,13 +132,16 @@ const HomePage:React.FC=()=>{
                     {/* <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
                     <path fill="currentColor" d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/>
                 </svg>
-            </div>
-                <h1 className="text-lg md:text-2xl pb-8">現在のスキル</h1>
+                </div>
+                </div>
+                {/* <h1 className="text-lg md:text-2xl pb-8">現在のスキル</h1> */}
+                <div className="flex justify-center pb-10">
+                <div>
                 <div className="flex items-center w-fit px-3 py-1 rounded-t ml-2 bg-gradient-to-l from-purple-400 to-pink-400">
                     <span><img src={user.avatarUrl} className="w-10 h-10 rounded-full" /></span>
                     <span className="pl-2 text-white font-bold">{user.name}</span>
                 </div>
-                <div className="w-[372px] md:w-[700px] lg:w-[850px] flex flex-col md:flex-row p-2 rounded-md border-[3px] border-purple-400 shadow-xl items-center"
+                <div className="w-[372px] md:w-[700px] lg:w-[850px] bg-white flex flex-col md:flex-row p-2 rounded-md border-[3px] border-purple-400 shadow-xl items-center"
                 style={isMediumScreen?{height:skillLineChartHeight&&skillLineChartHeight+20}:{height:skillLineChartHeight&&skillLineChartHeight+68}}>
                     <div className="m-1 md:ml-0 md:mr-2 flex items-center md:items-stretch md:flex-col md:flex-wrap h-full w-full overflow-scroll bg-white rounded-lg">
                         {skillButtonList?.map((skillData,index)=>{
@@ -151,6 +157,8 @@ const HomePage:React.FC=()=>{
                             <SkillsLineChart drawData={drawData} handleSkillLineChartHeight={handleSkillLineChartHeight}/>
                         </div>
                     </div>
+                </div>
+                </div>
                 </div>
             </div>
             
