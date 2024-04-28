@@ -199,6 +199,9 @@
         "color": "#447265",
         "url": "https://github.com/trending?l=DM"
     },
+    "Docker": {
+        "color": "#384d54"
+    },
     "Dockerfile": {
         "color": "#384d54",
         "url": "https://github.com/trending?l=Dockerfile"
@@ -466,6 +469,9 @@
     "Kotlin": {
         "color": "#A97BFF",
         "url": "https://github.com/trending?l=Kotlin"
+    },
+    "Linux": {
+        "color": "pink"
     },
     "Lua": {
         "color": "#000080",

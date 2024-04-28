@@ -89,6 +89,31 @@ def post_user_skills(id):
     user_skills = UserSkill.query.filter().all()
     return user_skills, 200
 
+@users_bp.route("/<int:id>/save-skills", methods=["POST"])
+@marshal_with(user_skill_fields)
+def save_user_skills(id):
+    inputData = request.json["inputData"]
+    skill = inputData["skill"]
+    understanding = inputData["understanding"]
+    confidence = inputData["confidence"]
+    isTutorial = inputData["isTutorial"]
+    isUse = inputData["isUse"]
+    isDevelop = inputData["isDevelop"]
+    
+    level = calc_skill_level(understanding, confidence, isTutorial, isUse, isDevelop)
+    new_skill = UserSkill()
+    new_skill.user_id = id
+    new_skill.skill = skill
+    new_skill.level = level
+    new_skill.color = search_color(skill)
+    dt = datetime.date.today()
+    string_date = dt.strftime("%Y.%m.%d")
+    current_date = string_date[2:]
+    new_skill.create_at = current_date
+    db.session.add(new_skill)
+    db.session.commit()
+    return new_skill, 200
+
 @users_bp.route("/<int:id>/skill/history", methods=["POST"])
 @marshal_with(skill_for_each_fields)
 def post_user_skill_history(id):

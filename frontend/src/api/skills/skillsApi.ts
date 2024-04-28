@@ -103,7 +103,7 @@ export type SaveSkillDataParams={
 export const saveSkillData=async(userId:number,inputData:SaveSkillDataParams):Promise<undefined>=>{
     const postData={userId:userId,inputData:inputData};
     console.log("<skills api (saveSkillData)> POST : ",postData);
-    const response= await fetch(`${BACKEND_URL_DUMMY}//`, {
+    const response= await fetch(`${BACKEND_URL_DUMMY}/users/${userId}/save-skills`, {
         method: "POST",
         body: JSON.stringify(postData), 
         headers: {
