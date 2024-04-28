@@ -100,8 +100,8 @@ export type SaveSkillDataParams={
     isDevelop:boolean
 };
 
-export const saveSkillData=async(inputData:SaveSkillDataParams):Promise<undefined>=>{
-    const postData=inputData;
+export const saveSkillData=async(userId:number,inputData:SaveSkillDataParams):Promise<undefined>=>{
+    const postData={userId:userId,inputData:inputData};
     console.log("<skills api (saveSkillData)> POST : ",postData);
     const response= await fetch(`${BACKEND_URL_DUMMY}//`, {
         method: "POST",
