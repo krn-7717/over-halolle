@@ -1,5 +1,6 @@
 from backend import db
 from backend.common.models.user import User
+import datetime
 from flask import Blueprint
 from flask import jsonify
 from flask import request
@@ -22,6 +23,10 @@ def signup():
         new_user.name = "匿名ユーザ"
         new_user.email = email
         new_user.password = password
+        dt = datetime.date.today()
+        string_date = dt.strftime("%Y.%m.%d")
+        current_date = string_date[2:]
+        new_user.create_at = current_date
         db.session.add(new_user)
         db.session.commit()
         return {

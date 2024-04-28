@@ -1,10 +1,15 @@
+from backend.common.models.skill import Skill
 from backend.common.models.user import User
 from backend.common.models.user_skill import UserSkill
 from backend import db
 from flask import Blueprint
 from flask import request
+from flask import jsonify
 from flask_restful import fields
 from flask_restful import marshal_with
+from backend.utils.color import search_color
+from backend.utils.calc_skill_level import calc_skill_level
+import datetime
 
 users_bp = Blueprint("users", __name__, url_prefix="/users")
 
@@ -16,17 +21,19 @@ resource_fields = {
     "github": fields.String,
     "qiita": fields.String,
     "zenn": fields.String,
-    "created_at": fields.DateTime,
-    "updated_at": fields.DateTime,
+    "created_at": fields.String,
+    "updated_at": fields.String,
 }
 
 user_skill_fields = {
-    "id": fields.Integer,
-    "user_id": fields.Integer,
-    "color": fields.String,
-    "skill": fields.String, 
-    "created_at": fields.DateTime,
-    "updated_at": fields.DateTime,
+    "skill": fields.String,
+    "level": fields.Integer,
+    "color": fields.String
+}
+
+skill_for_each_fields = {
+    "date": fields.String,
+    "level": fields.Integer
 }
 
 @users_bp.route("/", methods=["GET"])
@@ -37,7 +44,7 @@ def show_all_user():
 
 @users_bp.route("/<int:id>", methods=["GET"])
 @marshal_with(resource_fields)
-def show_user_skills(id):
+def show_user_info(id):
     current_user_skills = User.query.filter(User.id==id).all()
     return current_user_skills
 
@@ -72,6 +79,28 @@ def delete_user(id):
 
 @users_bp.route("/<int:id>/skills", methods=["GET"])
 @marshal_with(user_skill_fields)
-def add_user_skill(id):
+def show_user_skills(id):
     user_skills = UserSkill.query.filter().all()
     return user_skills
+
+@users_bp.route("/<int:id>/skills", methods=["POST"])
+@marshal_with(user_skill_fields)
+def post_user_skills(id):
+    user_skills = UserSkill.query.filter().all()
+    return user_skills, 200
+
+@users_bp.route("/<int:id>/skill/history", methods=["POST"])
+@marshal_with(skill_for_each_fields)
+def post_user_skill_history(id):
+    user_id = request.json["userId"]
+    skill = request.json["skill"]
+    
+    user_skills = UserSkill.query.filter(UserSkill.user_id==user_id).all()
+    
+    res = []
+    for u in user_skills:
+        res.append({
+            "date": u.create_at, 
+            "level": u.level
+        })
+    return res, 200
