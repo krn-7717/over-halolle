@@ -103,7 +103,7 @@ const InputSkillPage:React.FC=()=>{
         if(inputData.skill!==undefined){
             try{
                 (async()=>{
-                    await skillsApi.saveSkillData(inputData);
+                    await skillsApi.saveSkillData(user.id,inputData);
                         alert("スキルを登録しました");
                         navigate("/main")
                 })();
