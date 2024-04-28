@@ -19,10 +19,7 @@ def signup():
             "message": "This email address is already in use."
         }), 409
     else:
-        new_user = User()
-        new_user.name = "匿名ユーザ"
-        new_user.email = email
-        new_user.password = password
+        new_user = User(name="匿名ユーザ", email=email, password=password)
         dt = datetime.date.today()
         string_date = dt.strftime("%Y.%m.%d")
         current_date = string_date[2:]
