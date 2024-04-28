@@ -10,6 +10,6 @@ class User(db.Model):
     github = db.Column(db.String(100))
     qiita = db.Column(db.String(100))
     zenn = db.Column(db.String(100))
-    create_at = db.Column(db.DateTime)
-    updated_at = db.Column(db.DateTime)
+    create_at = db.Column(db.String(100))
+    updated_at = db.Column(db.String(100))
     user_skill = db.relationship("UserSkill")

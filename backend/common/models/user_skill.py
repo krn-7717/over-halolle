@@ -6,5 +6,6 @@ class UserSkill(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     skill = db.Column(db.String(100))
     level = db.Column(db.Integer)
-    create_at = db.Column(db.DateTime)
-    updated_at = db.Column(db.DateTime)
+    color = db.Column(db.String(100))
+    create_at = db.Column(db.String(100))
+    updated_at = db.Column(db.String(100))
