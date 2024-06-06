@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
+
 db = SQLAlchemy()
 
 def create_app():
@@ -10,8 +11,8 @@ def create_app():
     
     from backend.controllers.skill_controller import skills_bp
     from backend.controllers.user_controller import users_bp
-    from backend.interceptors.auth import login_bp
-    from backend.interceptors.signup import signup_bp
+    from backend.controllers.auth.auth import login_bp
+    from backend.controllers.auth.signup import signup_bp
     
     app.register_blueprint(skills_bp)
     app.register_blueprint(users_bp)

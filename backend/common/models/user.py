@@ -1,6 +1,7 @@
 from backend import db
 from backend.common.models.user_skill import UserSkill
 
+
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

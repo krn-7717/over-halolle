@@ -2,6 +2,7 @@ from math import ceil
 from math import log
 from math import sqrt
 
+
 def calc_skill_level(understanding, confidence, isTutorial=False, isUse=False, isDevelop=False):
     if isDevelop:
         if confidence >= 60:

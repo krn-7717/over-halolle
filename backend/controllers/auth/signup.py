@@ -1,9 +1,12 @@
-from backend import db
-from backend.common.models.user import User
 import datetime
+
 from flask import Blueprint
 from flask import jsonify
 from flask import request
+
+from backend import db
+from backend.common.models.user import User
+
 
 signup_bp = Blueprint("signup", __name__, url_prefix="/signup")
 

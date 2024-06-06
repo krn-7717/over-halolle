@@ -1,15 +1,18 @@
-from backend.common.models.skill import Skill
-from backend.common.models.user import User
-from backend.common.models.user_skill import UserSkill
-from backend import db
+import datetime
+
 from flask import Blueprint
 from flask import request
 from flask import jsonify
 from flask_restful import fields
 from flask_restful import marshal_with
-from backend.utils.color import search_color
+
+from backend import db
+from backend.common.models.skill import Skill
+from backend.common.models.user import User
+from backend.common.models.user_skill import UserSkill
 from backend.utils.calc_skill_level import calc_skill_level
-import datetime
+from backend.utils.color import search_color
+
 
 users_bp = Blueprint("users", __name__, url_prefix="/users")
 

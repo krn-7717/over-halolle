@@ -1,7 +1,9 @@
-from backend.common.models.user import User
 from flask import Blueprint
 from flask import jsonify
 from flask import request
+
+from backend.common.models.user import User
+
 
 login_bp = Blueprint("login", __name__, url_prefix="/login")
 

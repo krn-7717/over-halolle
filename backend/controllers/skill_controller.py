@@ -1,7 +1,9 @@
-from backend.common.models.skill import Skill
-from backend import db
 from flask import Blueprint
 from flask_restful import fields, marshal_with
+
+from backend import db
+from backend.common.models.skill import Skill
+
 
 skills_bp = Blueprint("skills", __name__, url_prefix="/skills")
 
