@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask import jsonify
 from flask import request
 
-from backend.common.models.user import User
+from backend.models.user import User
 
 
 login_bp = Blueprint("login", __name__, url_prefix="/login")
@@ -18,13 +18,13 @@ def login():
             "status": 401,
             "message": "Invalid email address or password."
         }), 401
-    else:
-        return {
-            "status": 200,
-            "data": {
-                "id": user.id,
-                "name": user.name,
-                "github": None,
-                "qiitaid": None
-            }
-        }, 200
+
+    return {
+        "status": 200,
+        "data": {
+            "id": user.id,
+            "name": user.name,
+            "github": None,
+            "qiitaid": None
+        }
+    }, 200
