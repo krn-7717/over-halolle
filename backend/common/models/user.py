@@ -14,3 +14,30 @@ class User(db.Model):
     create_at = db.Column(db.String(100))
     updated_at = db.Column(db.String(100))
     user_skill = db.relationship("UserSkill")
+    
+    @staticmethod
+    def get_all():
+        return User.query.filter().all()
+    
+    @staticmethod
+    def get_by_email(email):
+        return User.query.filter(User.email==email).first()
+    
+    @staticmethod
+    def create(email, password, name="匿名ユーザ"):
+        user = User(email=email, password=password, name=name)
+        db.session.add(user)
+        db.session.commit()
+        return user
+    
+    @staticmethod
+    def rename(id, name):
+        user = User.query.filter(User.id==id).first()
+        user.name = name
+        db.session.commit()
+        return user
+    
+    @staticmethod
+    def delete(id):
+        User.query.filter(User.id==id).delete()
+        db.session.commit()
