@@ -1,5 +1,5 @@
 from backend import db
-from backend.common.models.user_skill import UserSkill
+from backend.models.user_skill import UserSkill
 
 
 class User(db.Model):
