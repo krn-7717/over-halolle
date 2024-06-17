@@ -11,11 +11,13 @@ def create_app():
     
     from backend.controllers.skill_controller import skills_bp
     from backend.controllers.user_controller import users_bp
+    from backend.controllers.user_skill_controller import user_skill_bp
     from backend.controllers.auth.auth import login_bp
     from backend.controllers.auth.signup import signup_bp
     
     app.register_blueprint(skills_bp)
     app.register_blueprint(users_bp)
+    app.register_blueprint(user_skill_bp)
     app.register_blueprint(login_bp)
     app.register_blueprint(signup_bp)
     
