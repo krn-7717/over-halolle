@@ -1,10 +1,9 @@
 from backend import db
-
 from backend.utils.color import search_color
 
 
 class UserSkill(db.Model):
-    __tablename__ = 'user_skills'
+    __tablename__ = "user_skills"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     skill = db.Column(db.String(100))
@@ -12,15 +11,15 @@ class UserSkill(db.Model):
     color = db.Column(db.String(100))
     create_at = db.Column(db.String(100))
     updated_at = db.Column(db.String(100))
-    
+
     @staticmethod
     def get_all(id):
-        return UserSkill.query.filter(UserSkill.user_id==id).all()
-    
+        return UserSkill.query.filter(UserSkill.user_id == id).all()
+
     @staticmethod
     def get_by_id(id):
-        return UserSkill.query.filter(UserSkill.user_id==id).all()
-    
+        return UserSkill.query.filter(UserSkill.user_id == id).all()
+
     @staticmethod
     def create(id, skill, level):
         new_skill = UserSkill()
